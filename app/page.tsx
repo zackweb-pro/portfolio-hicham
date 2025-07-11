@@ -11,8 +11,8 @@ function PageContent() {
   
   const translations = {
     title: {
-      en: 'Creative Works',
-      fr: 'Œuvres Créatives'
+      en: 'Works',
+      fr: 'Œuvres'
     },
     subtitle: {
       en: 'A curated collection of design projects showcasing creativity, innovation, and attention to detail.',
@@ -60,7 +60,7 @@ function PageContent() {
                 <span className="relative bg-blue-500 dark:bg-white bg-clip-text text-transparent font-black" style={{
                   textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(147, 51, 234, 0.2)'
                 }}>
-                  {translations.title[language]}
+                  {translations.title[language].toUpperCase()}
                 </span>
               </h1>
             </div>
