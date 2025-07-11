@@ -21,7 +21,7 @@ function PageContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-slate-950 dark:via-blue-950 dark:to-indigo-950 transition-colors duration-300 relative overflow-hidden">
+<div className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 dark:from-black dark:via-gray-950 dark:to-slate-950 transition-colors duration-300 relative overflow-hidden">
       {/* Bubbles Background - Like lights behind */}
       <div className="absolute inset-0 z-0">
         {/* Large bubble - top right corner */}

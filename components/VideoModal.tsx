@@ -262,12 +262,29 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
               )}
             </div>
 
-            {/* Sliding Details Section - Only covers media area */}
+            {/* Sliding Details Section - Full screen on mobile */}
             <div className={`
-              absolute inset-0 bg-white dark:bg-gray-900 transform transition-transform duration-500 ease-in-out z-10
+              absolute bg-white dark:bg-gray-900 transform transition-transform duration-500 ease-in-out z-10
               ${showDetails ? 'translate-y-0' : 'translate-y-full'}
+              ${/* Mobile: Full screen height */ ''}
+              md:inset-0
+              ${/* Mobile: Full screen positioning */ ''}
+              inset-x-0 top-0 bottom-0 h-screen md:h-auto
             `}>
-              {/* Scrollable Content - No header */}
+              {/* Mobile Header - Only visible on mobile when details are shown */}
+              {showDetails && (
+                <div className="md:hidden flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Project Details</h3>
+                  <button
+                    onClick={handleHideDetails}
+                    className="w-10 h-10 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full flex items-center justify-center text-gray-900 hover:text-blue-600 dark:text-white dark:hover:text-blue-400 transition-colors"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+              )}
+
+              {/* Scrollable Content */}
               <div className="h-full overflow-y-auto">
                 <div className="p-6">
                   {/* Detailed Description */}
@@ -280,7 +297,7 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
                       <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                         The project involved multiple stages of development including concept design, preparation, production, and post-production. Each phase required careful attention to detail and collaboration with various team members.
                       </p>
-                      <div className="grid grid-cols-2 gap-4 my-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
                         <div>
                           <h5 className="text-gray-900 dark:text-white font-medium mb-2">Technical Details</h5>
                           <ul className="text-gray-500 dark:text-gray-400 text-sm space-y-1">
@@ -331,7 +348,7 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
                       <div className="w-full">
                         <Gallery 
                           images={galleryImages}
-                          columns={3}
+                          columns={showDetails ? (typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 3) : 3}
                           gap={16}
                         />
                       </div>
@@ -344,10 +361,10 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
 
           {/* Bottom Section - Details Button */}
           {!showDetails && (
-            <div className="p-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-white relative z-20">
+            <div className="p-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-white relative z-20 flex justify-center align-items-center">
               <button
                 onClick={handleShowDetails}
-                className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+                className="w-[100px] md:w-auto px-6 py-3 bg-gradient-to-r from-blue-400 to-blue-600 text-white rounded-3xl transition-colors font-medium shadow-lg "
               >
                 Details
               </button>
