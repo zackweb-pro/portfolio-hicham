@@ -55,7 +55,7 @@ function PageContent() {
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent blur-md opacity-50"></span>
                 
                 {/* Main readable text */}
-                <span className="relative bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 dark:from-blue-400 dark:via-blue-500 dark:to-cyan-400 bg-clip-text text-transparent font-black" style={{
+                <span className="relative bg-black dark:bg-white bg-clip-text text-transparent font-black" style={{
                   textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(147, 51, 234, 0.2)'
                 }}>
                   {translations.title[language]}

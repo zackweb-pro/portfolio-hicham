@@ -91,40 +91,29 @@ export default function FilterSearch({
   return (
     <div className="">
       {/* Search and Filter Toggle */}
-      <div className="flex flex-col sm:flex-row gap-4 mb-6">
-        {/* Search Input with Glowing Border */}
-        <div className="relative flex-1">
-          <div className="relative shadow-xs rounded-xl p-[1px] overflow-clip">
-            {/* Border gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-blue-300 to-gray-200 dark:from-gray-700 dark:via-blue-500 dark:to-gray-700 -z-1"></div>
+      <div className="flex justify-center align-items-center flex-col sm:flex-row gap-4 mb-6">
+        {/* Search Input with Bottom Border Only */}
+        <div className="relative w-80"> {/* Fixed width ~320px */}
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 z-10" size={20} />
+            <input
+              type="text"
+              placeholder={translations.search[language]}
+              value={searchQuery}
+              onChange={(e) => onSearch(e.target.value)}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              className="w-full pl-10 pr-4 py-3 bg-transparent border-0 border-b-2 border-gray-200 dark:border-gray-700 focus:border-blue-500 dark:focus:border-blue-400 transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 outline-none rounded-none"
+            />
             
-            {/* Top glowing line */}
-            <div className={`absolute top-0 left-[10px] h-px w-[100px] bg-gradient-to-r from-blue-400/0 via-blue-400 to-blue-400/0 mix-blend-overlay transition-opacity duration-300 ${isFocused ? 'opacity-100' : 'opacity-0'}`}></div>
-            
-            {/* Input container with original styling */}
-            <div className="rounded-[calc(0.75rem-1px)] relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 z-10" size={20} />
-              <input
-                type="text"
-                placeholder={translations.search[language]}
-                value={searchQuery}
-                onChange={(e) => onSearch(e.target.value)}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-                className="w-full pl-10 pr-4 py-3 bg-white dark:bg-gray-800 border-0 rounded-[calc(0.75rem-1px)] focus:ring-2 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 outline-none"
-              />
-            </div>
+            {/* Glowing bottom line on focus */}
+            <div className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400/0 via-blue-400 to-blue-400/0 transition-all duration-300 ${isFocused ? 'w-full opacity-100' : 'w-0 opacity-0'}`}></div>
           </div>
         </div>
 
         {/* Button Group */}
-        <div className="flex gap-3">
-          {/* Results Count Button */}
-          <div className="flex items-center px-4 py-3 bg-gray-100/30 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-600 rounded-xl">
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              {translations.showingResults[language]}
-            </span>
-          </div>
+        <div className="flex gap-3 ">
+
 
           {/* Filter Toggle Button */}
           <button
