@@ -33,7 +33,7 @@ export default function PortfolioCard({ item, onVideoClick }: PortfolioCardProps
         <div className="aspect-video overflow-hidden">
           <img
             src={item.thumbnail}
-            alt={item.title}
+            alt={typeof item.title === 'string' ? item.title : item.title[language]}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
         </div>
@@ -53,9 +53,13 @@ export default function PortfolioCard({ item, onVideoClick }: PortfolioCardProps
           transform transition-transform duration-300 
           ${isHovered ? 'translate-y-0' : 'translate-y-full'}
         `}>
-          <h3 className="text-white font-semibold text-lg mb-1">{item.title[language]}</h3>
+          <h3 className="text-white font-semibold text-lg mb-1">
+            {typeof item.title === 'string' ? item.title : item.title[language]}
+          </h3>
           {item.description && (
-            <p className="text-white/80 text-sm">{item.description[language]}</p>
+            <p className="text-white/80 text-sm">
+              {typeof item.description === 'string' ? item.description : item.description[language]}
+            </p>
           )}
         </div>
 
