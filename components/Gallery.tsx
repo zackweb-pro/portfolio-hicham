@@ -1,232 +1,179 @@
-import React, { useState, useEffect } from 'react';
+"use client";
+
+import { useState, useEffect, useRef } from 'react';
+import { X, Expand } from 'lucide-react';
+
+interface GalleryImage {
+  src: string;
+  alt: string;
+  aspectRatio: number;
+}
+
+interface GalleryImageWithIndex extends GalleryImage {
+  index: number;
+  height: number;
+}
 
 interface GalleryProps {
-  images?: Array<{
-    src: string;
-    alt: string;
-    aspectRatio?: number;
-  }>;
+  images: GalleryImage[];
   columns?: number;
   gap?: number;
 }
 
-const Gallery: React.FC<GalleryProps> = ({ 
-  images = [], 
-  columns = 3, 
-  gap = 16 
-}) => {
-  const [imageData, setImageData] = useState<Array<{
-    src: string;
-    alt: string;
-    aspectRatio: number;
-    height: number;
-  }>>([]);
-  const [loading, setLoading] = useState(true);
+export default function Gallery({ images, columns = 3, gap = 16 }: GalleryProps) {
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [imageColumns, setImageColumns] = useState<GalleryImageWithIndex[][]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Default test images with various aspect ratios
-  const defaultImages = [
-    {
-      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
-      alt: "Mountain landscape",
-      aspectRatio: 4/3
-    },
-    {
-      src: "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=600&h=800&fit=crop",
-      alt: "Forest path",
-      aspectRatio: 3/4
-    },
-    {
-      src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop",
-      alt: "Forest canopy",
-      aspectRatio: 2/1
-    },
-    {
-      src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=600&fit=crop",
-      alt: "Lake reflection",
-      aspectRatio: 1
-    },
-    {
-      src: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&h=500&fit=crop",
-      alt: "Desert sunset",
-      aspectRatio: 8/5
-    },
-    {
-      src: "https://images.unsplash.com/photo-1502780402662-acc01917949e?w=500&h=800&fit=crop",
-      alt: "Coastal cliffs",
-      aspectRatio: 5/8
-    },
-    {
-      src: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=700&h=450&fit=crop",
-      alt: "Ocean waves",
-      aspectRatio: 7/4.5
-    },
-    {
-      src: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=600&h=900&fit=crop",
-      alt: "Flower field",
-      aspectRatio: 2/3
-    },
-    {
-      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&h=300&fit=crop",
-      alt: "Panoramic mountain",
-      aspectRatio: 3/1
-    }
-  ];
-
-  const imagesToUse = images.length > 0 ? images : defaultImages;
-
+  // Calculate column layout
   useEffect(() => {
-    const loadImages = async () => {
-      const loadedImages = await Promise.all(
-        imagesToUse.map(async (img) => {
-          return new Promise<{
-            src: string;
-            alt: string;
-            aspectRatio: number;
-            height: number;
-          }>((resolve) => {
-            if (img.aspectRatio) {
-              // Use provided aspect ratio
-              const baseHeight = 300;
-              const height = baseHeight / img.aspectRatio;
-              resolve({
-                src: img.src,
-                alt: img.alt,
-                aspectRatio: img.aspectRatio,
-                height
-              });
-            } else {
-              // Calculate aspect ratio from image
-              const image = new Image();
-              image.onload = () => {
-                const aspectRatio = image.width / image.height;
-                const baseHeight = 300;
-                const height = baseHeight / aspectRatio;
-                resolve({
-                  src: img.src,
-                  alt: img.alt,
-                  aspectRatio,
-                  height
-                });
-              };
-              image.onerror = () => {
-                // Fallback if image fails to load
-                resolve({
-                  src: img.src,
-                  alt: img.alt,
-                  aspectRatio: 1,
-                  height: 300
-                });
-              };
-              image.src = img.src;
-            }
-          });
-        })
-      );
+    if (!images.length) return;
+
+    const containerWidth = containerRef.current?.offsetWidth || 1200;
+    const columnWidth = (containerWidth - gap * (columns - 1)) / columns;
+
+    // Create empty columns array with proper typing
+    const cols: GalleryImageWithIndex[][] = Array.from({ length: columns }, () => []);
+    const colHeights = new Array(columns).fill(0);
+
+    images.forEach((img, index) => {
+      const height = columnWidth / img.aspectRatio;
       
-      setImageData(loadedImages);
-      setLoading(false);
-    };
-
-    loadImages();
-  }, [imagesToUse]);
-
-  // Calculate responsive columns
-  const getResponsiveColumns = () => {
-    if (typeof window === 'undefined') return columns;
-    
-    const width = window.innerWidth;
-    if (width < 640) return 1;
-    if (width < 1024) return Math.min(2, columns);
-    return columns;
-  };
-
-  const [responsiveColumns, setResponsiveColumns] = useState(getResponsiveColumns());
-
-  useEffect(() => {
-    const handleResize = () => {
-      setResponsiveColumns(getResponsiveColumns());
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [columns]);
-
-  // Create column arrays for masonry layout
-  const createColumns = () => {
-    const cols = Array.from({ length: responsiveColumns }, () => []);
-    const colHeights = Array(responsiveColumns).fill(0);
-
-    imageData.forEach((img, index) => {
       // Find the shortest column
       const shortestColIndex = colHeights.indexOf(Math.min(...colHeights));
-      cols[shortestColIndex].push({ ...img, index });
-      colHeights[shortestColIndex] += img.height + gap;
+      cols[shortestColIndex].push({ ...img, index, height });
+      colHeights[shortestColIndex] += height + gap;
     });
 
-    return cols;
+    setImageColumns(cols);
+  }, [images, columns, gap]);
+
+  const openModal = (index: number) => {
+    setSelectedImage(index);
   };
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-      </div>
-    );
-  }
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
 
-  const columnArrays = createColumns();
+  const goToNext = () => {
+    if (selectedImage !== null) {
+      setSelectedImage((selectedImage + 1) % images.length);
+    }
+  };
+
+  const goToPrevious = () => {
+    if (selectedImage !== null) {
+      setSelectedImage(selectedImage === 0 ? images.length - 1 : selectedImage - 1);
+    }
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (selectedImage === null) return;
+
+      switch (event.key) {
+        case 'Escape':
+          closeModal();
+          break;
+        case 'ArrowRight':
+          goToNext();
+          break;
+        case 'ArrowLeft':
+          goToPrevious();
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage]);
 
   return (
-    <div className="w-full">
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold text-white mb-2">Project Process Gallery</h2>
-        <p className="text-gray-400">
-          Step-by-step visualization of the creative process • {imageData.length} steps
-        </p>
-      </div>
-      
+    <>
       <div 
-        className="flex gap-4 w-full"
-        style={{ gap: `${gap}px` }}
+        ref={containerRef}
+        className="w-full"
+        style={{ 
+          display: 'grid', 
+          gridTemplateColumns: `repeat(${columns}, 1fr)`,
+          gap: `${gap}px`
+        }}
       >
-        {columnArrays.map((column, colIndex) => (
-          <div 
-            key={colIndex}
-            className="flex-1 flex flex-col min-w-0"
-            style={{ gap: `${gap}px` }}
-          >
+        {imageColumns.map((column, colIndex) => (
+          <div key={colIndex} className="flex flex-col" style={{ gap: `${gap}px` }}>
             {column.map((img) => (
               <div
                 key={img.index}
-                className="relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] group cursor-pointer bg-gray-700 w-full"
-                style={{ 
-                  aspectRatio: img.aspectRatio,
-                  minHeight: '200px'
-                }}
+                className="relative group cursor-pointer overflow-hidden rounded-lg"
+                onClick={() => openModal(img.index)}
+                style={{ height: `${img.height}px` }}
               >
                 <img
                   src={img.src}
                   alt={img.alt}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-end">
-                  <div className="p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-sm font-medium">{img.alt}</p>
-                    <p className="text-xs opacity-80">
-                      Aspect ratio: {img.aspectRatio.toFixed(2)}:1
-                    </p>
-                  </div>
+                
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                  <Expand 
+                    size={24} 
+                    className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  />
                 </div>
               </div>
             ))}
           </div>
         ))}
       </div>
-      
-   
-    </div>
-  );
-};
 
-export default Gallery;
+      {/* Modal */}
+      {selectedImage !== null && (
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[200] flex items-center justify-center p-4">
+          <div className="relative max-w-7xl max-h-full">
+            <img
+              src={images[selectedImage].src}
+              alt={images[selectedImage].alt}
+              className="max-w-full max-h-full object-contain"
+            />
+            
+            {/* Close button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center text-white transition-colors"
+            >
+              <X size={24} />
+            </button>
+            
+            {/* Previous button */}
+            {images.length > 1 && (
+              <button
+                onClick={goToPrevious}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center text-white transition-colors"
+              >
+                ←
+              </button>
+            )}
+            
+            {/* Next button */}
+            {images.length > 1 && (
+              <button
+                onClick={goToNext}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center text-white transition-colors"
+              >
+                →
+              </button>
+            )}
+            
+            {/* Image counter */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm">
+              {selectedImage + 1} / {images.length}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
