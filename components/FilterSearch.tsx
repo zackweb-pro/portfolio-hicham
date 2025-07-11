@@ -10,6 +10,7 @@ export interface FilterSearchProps {
   searchQuery: string;
   selectedCategories: string[];
   selectedTypes: string[];
+  resultCount?: number; // Add this prop
 }
 
 const categories = [
@@ -32,7 +33,8 @@ export default function FilterSearch({
   onFilter,
   searchQuery,
   selectedCategories,
-  selectedTypes
+  selectedTypes,
+  resultCount = 0
 }: FilterSearchProps) {
   const { language } = useLanguage();
   const [showFilters, setShowFilters] = useState(false);
@@ -59,8 +61,8 @@ export default function FilterSearch({
       fr: 'Tout Effacer'
     },
     showingResults: {
-      en: 'Showing {count} results',
-      fr: 'Affichage de {count} résultats'
+      en: `${resultCount} results`,
+      fr: `${resultCount} résultats`
     }
   };
 
@@ -101,25 +103,35 @@ export default function FilterSearch({
           />
         </div>
 
-        {/* Filter Toggle Button */}
-        <button
-          onClick={() => setShowFilters(!showFilters)}
-          className={`
-            flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-200
-            ${showFilters || hasActiveFilters
-              ? 'bg-blue-500 text-white shadow-lg'
-              : 'bg-white/30 dark:bg-gray-800/30 text-while-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50/30 dark:hover:bg-gray-700/30'
-            }
-          `}
-        >
-          <Filter size={20} />
-          <span>{translations.filters[language]}</span>
-          {hasActiveFilters && (
-            <span className="bg-white/20 text-xs px-2 py-1 rounded-full">
-              {selectedCategories.length + selectedTypes.length + (searchQuery ? 1 : 0)}
+        {/* Button Group */}
+        <div className="flex gap-3">
+          {/* Results Count Button */}
+          <div className="flex items-center px-4 py-3 bg-gray-100/30 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-600 rounded-xl">
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              {translations.showingResults[language]}
             </span>
-          )}
-        </button>
+          </div>
+
+          {/* Filter Toggle Button */}
+          <button
+            onClick={() => setShowFilters(!showFilters)}
+            className={`
+              flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-200
+              ${showFilters || hasActiveFilters
+                ? 'bg-blue-500 text-white shadow-lg'
+                : 'bg-white/30 dark:bg-gray-800/30 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50/30 dark:hover:bg-gray-700/30'
+              }
+            `}
+          >
+            <Filter size={20} />
+            <span>{translations.filters[language]}</span>
+            {hasActiveFilters && (
+              <span className="bg-white/20 text-xs px-2 py-1 rounded-full">
+                {selectedCategories.length + selectedTypes.length + (searchQuery ? 1 : 0)}
+              </span>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Filter Panel */}

@@ -293,6 +293,7 @@ export default function PortfolioGrid() {
         searchQuery={searchQuery}
         selectedCategories={selectedCategories}
         selectedTypes={selectedTypes}
+        resultCount={filteredData.length}
       />
 
       {/* Results */}
@@ -319,13 +320,7 @@ export default function PortfolioGrid() {
           </div>
 
           {/* Load More Section - More Compact */}
-          <div className="mt-2 text-center">
-            <p className="text-[12px] text-gray-600 dark:text-gray-200 mb-2">
-              {translations.showingResults[language]
-                .replace('{current}', Math.min(visibleItems, filteredData.length).toString())
-                .replace('{total}', filteredData.length.toString())}
-            </p>
-            
+          <div className="mt-5 text-center">
             {hasMore && (
               <button
                 onClick={loadMore}

@@ -15,12 +15,17 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="fixed right-0 top-0 h-full w-20 bg-white/95 dark:bg-black/20 backdrop-blur-lg border-l-0 dark:border-l dark:border-white/10 z-50 flex flex-col justify-between align-items-center">
+    <div className="fixed right-0 top-0 h-full w-20 bg-white/95 dark:bg-black/20 backdrop-blur-lg z-50 flex flex-col justify-between align-items-center">
+      {/* Vertical glowing line on the left side */}
+      <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent opacity-70 shadow-lg shadow-blue-500/50"></div>
+      
       {/* Logo */}
-      <div className="p-4 border-b-0 dark:border-b dark:border-white/10">
-        <div className="w-12 h-12 bg-gradient-to-br from-blue-400/90 to-blue-600/90 rounded-xl flex items-center justify-center shadow-lg backdrop-blur-sm border-0 dark:border dark:border-white/10">
+      <div className="p-4 relative">
+        <div className="w-12 h-12 bg-gradient-to-br from-blue-400/90 to-blue-600/90 rounded-xl flex items-center justify-center shadow-lg backdrop-blur-sm">
           <span className="text-white font-bold text-xl drop-shadow-sm">JB</span>
         </div>
+        {/* Glowing bottom border */}
+        {/* <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-70 shadow-lg shadow-blue-500/50"></div> */}
       </div>
 
       {/* Navigation */}
@@ -50,7 +55,10 @@ export default function Sidebar() {
       </nav>
 
       {/* Bottom Controls */}
-      <div className="p-4 space-y-4 border-t-0 dark:border-t dark:border-white/10">
+      <div className="p-4 space-y-4 relative">
+        {/* Glowing top border */}
+        {/* <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-70 shadow-lg shadow-blue-500/50"></div> */}
+        
         {/* Language Toggle */}
         <button
           onClick={() => setLanguage(language === 'en' ? 'fr' : 'en')}
