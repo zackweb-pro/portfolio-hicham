@@ -179,6 +179,33 @@ const portfolioData: PortfolioItem[] = [
     },
     category: 'mobile',
     tags: ['icons', 'mobile', 'app', 'collection']
+  },
+    {
+    id: '13',
+    title: { en: 'App Icon Design', fr: 'Design d\'Icône d\'App' },
+    type: 'image',
+    thumbnail: 'https://images.pexels.com/photos/147413/twitter-facebook-together-exchange-of-information-147413.jpeg?auto=compress&cs=tinysrgb&w=800',
+    src: 'https://images.pexels.com/photos/147413/twitter-facebook-together-exchange-of-information-147413.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    description: { 
+      en: 'Modern mobile app icon collection', 
+      fr: 'Collection d\'icônes d\'applications mobiles modernes' 
+    },
+    category: 'mobile',
+    tags: ['icons', 'mobile', 'app', 'collection']
+  }
+,
+  {
+    id: '14',
+    title: { en: 'App Icon Design', fr: 'Design d\'Icône d\'App' },
+    type: 'image',
+    thumbnail: 'https://images.pexels.com/photos/147413/twitter-facebook-together-exchange-of-information-147413.jpeg?auto=compress&cs=tinysrgb&w=800',
+    src: 'https://images.pexels.com/photos/147413/twitter-facebook-together-exchange-of-information-147413.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    description: { 
+      en: 'Modern mobile app icon collection', 
+      fr: 'Collection d\'icônes d\'applications mobiles modernes' 
+    },
+    category: 'mobile',
+    tags: ['icons', 'mobile', 'app', 'collection']
   }
 ];
 
