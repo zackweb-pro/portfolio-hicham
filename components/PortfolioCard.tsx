@@ -21,7 +21,7 @@ export default function PortfolioCard({ item, onVideoClick }: PortfolioCardProps
 
   return (
     <div
-      className="group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500"
+      className="portfolio-card group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}

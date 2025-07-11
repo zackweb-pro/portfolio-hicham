@@ -221,7 +221,7 @@ export default function FilterSearch({
         <div className="mt-4 mb-2 flex flex-wrap gap-2">
           {searchQuery && (
             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200">
-              Search: "{searchQuery}"
+              {`Search: ${searchQuery}`}
               <button
                 onClick={() => onSearch('')}
                 className="ml-2 hover:text-purple-600 dark:hover:text-purple-300"
