@@ -21,29 +21,31 @@ function PageContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-slate-950 dark:via-blue-950 dark:to-indigo-950 transition-colors duration-300 relative overflow-hidden flex flex-col items-center justify-center">
-      {/* Animated Bubbles Background */}
+    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-slate-950 dark:via-blue-950 dark:to-indigo-950 transition-colors duration-300 relative overflow-hidden">
+      {/* Bubbles Background - Like lights behind */}
       <div className="absolute inset-0 z-0">
-        {/* Large bubbles behind menu */}
-        <div className="absolute top-20 right-10 w-32 h-32 bg-gradient-to-br from-blue-400/3 dark:from-blue-400/8 to-blue-400/3 dark:to-blue-400/8 rounded-full blur-sm"></div>
-        <div className="absolute top-60 right-5 w-24 h-24 bg-gradient-to-br from-blue-400/4 dark:from-blue-400/10 to-blue-400/4 dark:to-blue-400/10 rounded-full blur-sm"></div>
-        <div className="absolute bottom-40 right-8 w-20 h-20 bg-gradient-to-br from-blue-400/3 dark:from-blue-400/8 to-blue-400/3 dark:to-blue-400/8 rounded-full blur-sm"></div>
+        {/* Large bubble - top right corner */}
+        <div className="absolute top-10 right-10 w-[400px] h-[400px] bg-gradient-to-br from-white/8 to-gray-300/6 dark:from-blue-400/12 dark:to-purple-400/8 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-20 w-[250px] h-[250px] bg-gradient-to-br from-gray-200/6 to-white/8 dark:from-cyan-400/10 dark:to-blue-400/12 rounded-full blur-2xl"></div>
         
-        {/* Medium bubbles scattered */}
-        <div className="absolute top-32 left-20 w-16 h-16 bg-gradient-to-br from-blue-400/2 dark:from-blue-400/6 to-blue-400/2 dark:to-blue-400/6 rounded-full blur-sm"></div>
-        <div className="absolute top-80 left-40 w-12 h-12 bg-gradient-to-br from-blue-400/3 dark:from-blue-400/8 to-blue-400/3 dark:to-blue-400/8 rounded-full blur-sm"></div>
-        <div className="absolute bottom-60 left-60 w-28 h-28 bg-gradient-to-br from-blue-400/2 dark:from-blue-400/6 to-blue-400/2 dark:to-blue-400/6 rounded-full blur-sm"></div>
+        {/* Medium bubble - top left */}
+        <div className="absolute top-20 left-20 w-[280px] h-[280px] bg-gradient-to-br from-gray-200/5 to-white/7 dark:from-indigo-400/8 dark:to-blue-400/10 rounded-full blur-2xl"></div>
         
-        {/* Small bubbles */}
-        <div className="absolute top-40 left-80 w-8 h-8 bg-gradient-to-br from-blue-400/4 dark:from-blue-400/10 to-blue-400/4 dark:to-blue-400/10 rounded-full blur-sm"></div>
-        <div className="absolute top-96 left-32 w-6 h-6 bg-gradient-to-br from-blue-400/2 dark:from-blue-400/6 to-blue-400/2 dark:to-blue-400/6 rounded-full blur-sm"></div>
-        <div className="absolute bottom-32 left-96 w-10 h-10 bg-gradient-to-br from-blue-400/3 dark:from-blue-400/8 to-blue-400/3 dark:to-blue-400/8 rounded-full blur-sm"></div>
+        {/* Small bubble - center right */}
+        <div className="absolute top-1/2 right-1/3 w-[200px] h-[200px] bg-gradient-to-br from-white/10 to-gray-100/8 dark:from-purple-400/12 dark:to-pink-400/8 rounded-full blur-xl"></div>
         
-        {/* Additional scattered bubbles */}
-        <div className="absolute top-56 right-40 w-14 h-14 bg-gradient-to-br from-blue-400/2 dark:from-blue-400/6 to-blue-400/2 dark:to-blue-400/6 rounded-full blur-sm"></div>
-        <div className="absolute bottom-80 right-60 w-18 h-18 bg-gradient-to-br from-blue-400/2 dark:from-blue-400/6 to-blue-400/2 dark:to-blue-400/6 rounded-full blur-sm"></div>
-        <div className="absolute top-72 left-10 w-22 h-22 bg-gradient-to-br from-blue-400/2 dark:from-blue-400/6 to-blue-400/2 dark:to-blue-400/6 rounded-full blur-sm"></div>
+        {/* Medium bubble - bottom left */}
+        <div className="absolute bottom-20 left-1/4 w-[220px] h-[220px] bg-gradient-to-br from-gray-300/6 to-white/5 dark:from-blue-400/10 dark:to-cyan-400/8 rounded-full blur-2xl"></div>
+        
+        {/* Small bubble - bottom right */}
+        <div className="absolute bottom-40 right-20 w-[160px] h-[160px] bg-gradient-to-br from-white/12 to-gray-200/8 dark:from-teal-400/10 dark:to-blue-400/12 rounded-full blur-xl"></div>
+        
+        {/* Tiny bubble - center */}
+        <div className="absolute top-1/3 left-1/2 w-[120px] h-[120px] bg-gradient-to-br from-gray-100/8 to-white/10 dark:from-violet-400/8 dark:to-indigo-400/10 rounded-full blur-lg"></div>
       </div>
+
+      {/* Light Glassy Foreground Overlay - Very subtle */}
+      <div className="absolute inset-0 z-5 bg-white/2 dark:bg-black/3 backdrop-blur-[0.2px]"></div>
       
       <div className="flex relative z-10">
         {/* Main Content */}
@@ -55,7 +57,7 @@ function PageContent() {
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent blur-md opacity-50"></span>
                 
                 {/* Main readable text */}
-                <span className="relative bg-black dark:bg-white bg-clip-text text-transparent font-black" style={{
+                <span className="relative bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 dark:from-blue-400 dark:via-blue-500 dark:to-cyan-400 bg-clip-text text-transparent font-black" style={{
                   textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(147, 51, 234, 0.2)'
                 }}>
                   {translations.title[language]}

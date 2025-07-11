@@ -127,7 +127,7 @@ export default function FilterSearch({
             `}
           >
             <Filter size={20} />
-            <span>{translations.filters[language]}</span>
+            {/* <span>{translations.filters[language]}</span> */}
             {hasActiveFilters && (
               <span className="bg-white/20 text-xs px-2 py-1 rounded-full">
                 {selectedCategories.length + selectedTypes.length + (searchQuery ? 1 : 0)}
