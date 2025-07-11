@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Play } from 'lucide-react';
+import { Play, Video, Image as ImageIcon, Zap } from 'lucide-react';
 import { PortfolioItem } from './PortfolioGrid';
 import { useLanguage } from './LanguageProvider';
 
@@ -66,17 +66,11 @@ export default function PortfolioCard({ item, onVideoClick }: PortfolioCardProps
 
         {/* Type indicator */}
         <div className="absolute top-4 right-4">
-          <span className={`
-            px-2 py-1 rounded-full text-xs font-medium
-            ${item.type === 'video' 
-              ? 'bg-red-500 text-white' 
-              : item.type === 'gif' 
-                ? 'bg-green-500 text-white' 
-                : 'bg-blue-500 text-white'
-            }
-          `}>
-            {item.type.toUpperCase()}
-          </span>
+          <div className="w-8 h-8 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+            {item.type === 'video' && <Video size={16} className="text-red-500" />}
+            {item.type === 'gif' && <Zap size={16} className="text-green-500" />}
+            {item.type === 'image' && <ImageIcon size={16} className="text-blue-500" />}
+          </div>
         </div>
       </div>
     </div>
