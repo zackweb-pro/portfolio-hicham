@@ -22,20 +22,16 @@ export default function PortfolioCard({ item, onVideoClick }: PortfolioCardProps
 
   return (
     <div
-      className="group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 hover:scale-105"
+      className="group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
     >
-      {/* Glowing border animation */}
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse p-1">
-        <div className="w-full h-full bg-white dark:bg-gray-900 rounded-2xl"></div>
-      </div>
 
       {/* Content */}
       <div className="relative bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-xl">
         {/* Image/Thumbnail */}
-        <div className="aspect-[4/3] overflow-hidden">
+        <div className="aspect-video overflow-hidden">
           <img
             src={item.thumbnail}
             alt={item.title}

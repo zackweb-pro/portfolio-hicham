@@ -209,7 +209,7 @@ const portfolioData: PortfolioItem[] = [
   }
 ];
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 9;
 
 export default function PortfolioGrid() {
   const [selectedVideo, setSelectedVideo] = useState<PortfolioItem | null>(null);
@@ -286,6 +286,7 @@ export default function PortfolioGrid() {
   return (
     <>
       {/* Filter and Search */}
+    {/* Filter and Search */}
       <FilterSearch
         onSearch={handleSearch}
         onFilter={handleFilter}
@@ -296,18 +297,18 @@ export default function PortfolioGrid() {
 
       {/* Results */}
       {filteredData.length === 0 ? (
-        <div className="text-center py-16">
-          <div className="text-6xl mb-4">🔍</div>
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+        <div className="text-center py-6">
+          <div className="text-3xl mb-2">🔍</div>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
             {translations.noResults[language]}
           </h3>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
             {translations.tryDifferent[language]}
           </p>
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {displayedItems.map((item) => (
               <PortfolioCard
                 key={item.id}
@@ -317,9 +318,9 @@ export default function PortfolioGrid() {
             ))}
           </div>
 
-          {/* Load More Section */}
-          <div className="mt-16 text-center">
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+          {/* Load More Section - More Compact */}
+          <div className="mt-2 text-center">
+            <p className="text-[12px] text-gray-600 dark:text-gray-200 mb-2">
               {translations.showingResults[language]
                 .replace('{current}', Math.min(visibleItems, filteredData.length).toString())
                 .replace('{total}', filteredData.length.toString())}
@@ -328,7 +329,7 @@ export default function PortfolioGrid() {
             {hasMore && (
               <button
                 onClick={loadMore}
-                className="group relative px-8 py-4 bg-gradient-to-r from-blue-400 to-blue-600 text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="group relative px-5 py-2 bg-gradient-to-r from-blue-400 to-blue-600 text-white text-sm font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl"
               >
                 {/* Glowing background effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -336,7 +337,7 @@ export default function PortfolioGrid() {
                 {/* Button content */}
                 <span className="relative z-10 flex items-center space-x-2">
                   <span>{translations.loadMore[language]}</span>
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </span>
                 
                 {/* Ripple effect */}

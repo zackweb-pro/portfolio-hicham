@@ -47,14 +47,19 @@ function PageContent() {
       <div className="flex relative z-10">
         {/* Main Content */}
         <div className="flex-1 pr-20 relative z-20">
-          <div className="max-w-7xl mx-auto p-8">
-            <div className="mb-12">
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 drop-shadow-lg">
-                {translations.title[language]}
+          <div className="max-w-7xl mx-auto px-4 py-2">
+            <div className="mb-4">
+              <h1 className="relative text-4xl md:text-5xl lg:text-6xl font-black text-center mb-2">
+                {/* Glow background layer */}
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent blur-md opacity-50"></span>
+                
+                {/* Main readable text */}
+                <span className="relative bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 dark:from-blue-400 dark:via-blue-500 dark:to-cyan-400 bg-clip-text text-transparent font-black" style={{
+                  textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(147, 51, 234, 0.2)'
+                }}>
+                  {translations.title[language]}
+                </span>
               </h1>
-              {/* <p className="text-xl text-gray-700 dark:text-blue-100 max-w-2xl drop-shadow-md">
-                {translations.subtitle[language]}
-              </p> */}
             </div>
             <PortfolioGrid />
           </div>
