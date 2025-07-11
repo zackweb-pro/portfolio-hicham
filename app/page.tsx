@@ -4,6 +4,7 @@ import Sidebar from '@/components/Sidebar';
 import PortfolioGrid from '@/components/PortfolioGrid';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { LanguageProvider, useLanguage } from '@/components/LanguageProvider';
+import { ModalProvider } from '@/components/ModalProvider';
 
 function PageContent() {
   const { language } = useLanguage();
@@ -20,7 +21,7 @@ function PageContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-slate-950 dark:via-blue-950 dark:to-indigo-950 transition-colors duration-300 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-slate-950 dark:via-blue-950 dark:to-indigo-950 transition-colors duration-300 relative overflow-hidden flex flex-col items-center justify-center">
       {/* Animated Bubbles Background */}
       <div className="absolute inset-0 z-0">
         {/* Large bubbles behind menu */}
@@ -65,7 +66,7 @@ function PageContent() {
           </div>
         </div>
 
-        {/* Sidebar */}
+        {/* Sidebar - Now inside ModalProvider context */}
         <Sidebar />
       </div>
     </div>
@@ -76,7 +77,9 @@ export default function Home() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <PageContent />
+        <ModalProvider>
+          <PageContent />
+        </ModalProvider>
       </LanguageProvider>
     </ThemeProvider>
   );

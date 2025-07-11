@@ -3,10 +3,15 @@
 import { Home, Briefcase, Mail, Sun, Moon, Globe } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 import { useLanguage } from '@/components/LanguageProvider';
+import { useModal } from '@/components/ModalProvider';
 
 export default function Sidebar() {
   const { language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
+  const { isModalExpanded } = useModal();
+
+  // Debug logging
+  console.log('Sidebar: isModalExpanded =', isModalExpanded);
 
   const menuItems = [
     { icon: Home, label: language === 'en' ? 'Home' : 'Accueil', active: false },
@@ -14,8 +19,12 @@ export default function Sidebar() {
     { icon: Mail, label: 'Contact', active: false },
   ];
 
+  // Dynamic z-index based on modal state
+  const sidebarZIndex = isModalExpanded ? 'z-[0]' : 'z-[50]';
+  console.log('Sidebar: Using z-index class:', sidebarZIndex);
+
   return (
-    <div className="fixed right-0 top-0 h-full w-20 bg-white/95 dark:bg-black/20 backdrop-blur-lg z-50 flex flex-col justify-between align-items-center">
+    <div className={`fixed right-0 top-0 h-full w-20 bg-white/95 dark:bg-black/20 backdrop-blur-lg ${sidebarZIndex} flex flex-col justify-between align-items-center`}>
       {/* Vertical glowing line on the left side */}
       <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent opacity-70 shadow-lg shadow-blue-500/50"></div>
       
@@ -25,7 +34,7 @@ export default function Sidebar() {
           <span className="text-white font-bold text-xl drop-shadow-sm">JB</span>
         </div>
         {/* Glowing bottom border */}
-        {/* <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-70 shadow-lg shadow-blue-500/50"></div> */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-70 shadow-lg shadow-blue-500/50"></div>
       </div>
 
       {/* Navigation */}
@@ -57,7 +66,7 @@ export default function Sidebar() {
       {/* Bottom Controls */}
       <div className="p-4 space-y-4 relative">
         {/* Glowing top border */}
-        {/* <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-70 shadow-lg shadow-blue-500/50"></div> */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-70 shadow-lg shadow-blue-500/50"></div>
         
         {/* Language Toggle */}
         <button

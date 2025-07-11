@@ -38,6 +38,7 @@ export default function FilterSearch({
 }: FilterSearchProps) {
   const { language } = useLanguage();
   const [showFilters, setShowFilters] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const translations = {
     search: {
@@ -91,16 +92,29 @@ export default function FilterSearch({
     <div className="">
       {/* Search and Filter Toggle */}
       <div className="flex flex-col sm:flex-row gap-4 mb-6">
-        {/* Search Input */}
+        {/* Search Input with Glowing Border */}
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" size={20} />
-          <input
-            type="text"
-            placeholder={translations.search[language]}
-            value={searchQuery}
-            onChange={(e) => onSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-          />
+          <div className="relative shadow-xs rounded-xl p-[1px] overflow-clip">
+            {/* Border gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-blue-300 to-gray-200 dark:from-gray-700 dark:via-blue-500 dark:to-gray-700 -z-1"></div>
+            
+            {/* Top glowing line */}
+            <div className={`absolute top-0 left-[10px] h-px w-[100px] bg-gradient-to-r from-blue-400/0 via-blue-400 to-blue-400/0 mix-blend-overlay transition-opacity duration-300 ${isFocused ? 'opacity-100' : 'opacity-0'}`}></div>
+            
+            {/* Input container with original styling */}
+            <div className="rounded-[calc(0.75rem-1px)] relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 z-10" size={20} />
+              <input
+                type="text"
+                placeholder={translations.search[language]}
+                value={searchQuery}
+                onChange={(e) => onSearch(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                className="w-full pl-10 pr-4 py-3 bg-white dark:bg-gray-800 border-0 rounded-[calc(0.75rem-1px)] focus:ring-2 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 outline-none"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Button Group */}
@@ -136,7 +150,7 @@ export default function FilterSearch({
 
       {/* Filter Panel */}
       {showFilters && (
-        <div className="bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+        <div className="bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg mb-3">
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Categories */}
             <div className="flex-1">
@@ -204,7 +218,7 @@ export default function FilterSearch({
 
       {/* Active Filters Display */}
       {hasActiveFilters && (
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-4 mb-2 flex flex-wrap gap-2">
           {searchQuery && (
             <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200">
               Search: "{searchQuery}"

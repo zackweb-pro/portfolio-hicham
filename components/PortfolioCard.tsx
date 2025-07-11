@@ -15,9 +15,8 @@ export default function PortfolioCard({ item, onVideoClick }: PortfolioCardProps
   const { language } = useLanguage();
 
   const handleClick = () => {
-    if (item.type === 'video') {
-      onVideoClick(item);
-    }
+    // All media types now open in the modal
+    onVideoClick(item);
   };
 
   return (

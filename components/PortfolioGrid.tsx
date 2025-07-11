@@ -212,7 +212,7 @@ const portfolioData: PortfolioItem[] = [
 const ITEMS_PER_PAGE = 9;
 
 export default function PortfolioGrid() {
-  const [selectedVideo, setSelectedVideo] = useState<PortfolioItem | null>(null);
+  const [selectedMedia, setSelectedMedia] = useState<PortfolioItem | null>(null);
   const [visibleItems, setVisibleItems] = useState(ITEMS_PER_PAGE);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -240,10 +240,9 @@ export default function PortfolioGrid() {
     });
   }, [searchQuery, selectedCategories, selectedTypes, language]);
 
-  const handleVideoClick = (item: PortfolioItem) => {
-    if (item.type === 'video') {
-      setSelectedVideo(item);
-    }
+  const handleMediaClick = (item: PortfolioItem) => {
+    // Open modal for all media types (video, image, gif)
+    setSelectedMedia(item);
   };
 
   const handleSearch = (query: string) => {
@@ -286,7 +285,6 @@ export default function PortfolioGrid() {
   return (
     <>
       {/* Filter and Search */}
-    {/* Filter and Search */}
       <FilterSearch
         onSearch={handleSearch}
         onFilter={handleFilter}
@@ -314,28 +312,23 @@ export default function PortfolioGrid() {
               <PortfolioCard
                 key={item.id}
                 item={item}
-                onVideoClick={handleVideoClick}
+                onVideoClick={handleMediaClick}
               />
             ))}
           </div>
 
-          {/* Load More Section - More Compact */}
+          {/* Load More Section */}
           <div className="mt-5 text-center">
             {hasMore && (
               <button
                 onClick={loadMore}
                 className="group relative px-5 py-2 bg-gradient-to-r from-blue-400 to-blue-600 text-white text-sm font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl"
               >
-                {/* Glowing background effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                {/* Button content */}
                 <span className="relative z-10 flex items-center space-x-2">
                   <span>{translations.loadMore[language]}</span>
                   <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </span>
-                
-                {/* Ripple effect */}
                 <div className="absolute inset-0 bg-white/20 scale-0 group-active:scale-100 rounded-full transition-transform duration-200"></div>
               </button>
             )}
@@ -343,10 +336,10 @@ export default function PortfolioGrid() {
         </>
       )}
 
-      {selectedVideo && (
+      {selectedMedia && (
         <VideoModal
-          item={selectedVideo}
-          onClose={() => setSelectedVideo(null)}
+          item={selectedMedia}
+          onClose={() => setSelectedMedia(null)}
         />
       )}
     </>
