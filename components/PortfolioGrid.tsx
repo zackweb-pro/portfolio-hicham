@@ -328,10 +328,10 @@ export default function PortfolioGrid() {
             {hasMore && (
               <button
                 onClick={loadMore}
-                className="group relative px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="group relative px-8 py-4 bg-gradient-to-r from-blue-400 to-blue-600 text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl"
               >
                 {/* Glowing background effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 {/* Button content */}
                 <span className="relative z-10 flex items-center space-x-2">

@@ -15,7 +15,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="fixed right-0 top-0 h-full w-20 bg-white/95 dark:bg-white/5 backdrop-blur-lg border-l-0 dark:border-l dark:border-white/10 z-50 flex flex-col justify-between">
+    <div className="fixed right-0 top-0 h-full w-20 bg-white/95 dark:bg-black/20 backdrop-blur-lg border-l-0 dark:border-l dark:border-white/10 z-50 flex flex-col justify-between align-items-center">
       {/* Logo */}
       <div className="p-4 border-b-0 dark:border-b dark:border-white/10">
         <div className="w-12 h-12 bg-gradient-to-br from-blue-400/90 to-blue-600/90 rounded-xl flex items-center justify-center shadow-lg backdrop-blur-sm border-0 dark:border dark:border-white/10">
@@ -24,13 +24,13 @@ export default function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav className="py-8 ">
+      <nav className="py-8 m-auto">
         <div className="space-y-4">
           {menuItems.map((item, index) => (
             <div key={index} className="relative group">
               <button
                 className={`
-                  w-full h-12 flex items-center justify-center rounded-lg mx-2 transition-all duration-300
+                  w-12 h-12 flex items-center justify-center rounded-3xl mx-2 transition-all duration-300
                   ${item.active 
                     ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-white shadow-lg' 
                     : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100/50 dark:hover:bg-white/10 hover:scale-105'

@@ -97,7 +97,7 @@ export default function FilterSearch({
             placeholder={translations.search[language]}
             value={searchQuery}
             onChange={(e) => onSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+            className="w-full pl-10 pr-4 py-3 bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
           />
         </div>
 
@@ -107,8 +107,8 @@ export default function FilterSearch({
           className={`
             flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-200
             ${showFilters || hasActiveFilters
-              ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg'
-              : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
+              ? 'bg-blue-500 text-white shadow-lg'
+              : 'bg-white/30 dark:bg-gray-800/30 text-while-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50/30 dark:hover:bg-gray-700/30'
             }
           `}
         >
@@ -124,29 +124,28 @@ export default function FilterSearch({
 
       {/* Filter Panel */}
       {showFilters && (
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
+        <div className="bg-white/30 dark:bg-gray-800/30 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Categories */}
             <div className="flex-1">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 {translations.categories[language]}
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="flex flex-wrap gap-2">
                 {categories.map((category) => (
-                  <label
+                  <button
                     key={category.id}
-                    className="flex items-center space-x-2 cursor-pointer group"
+                    onClick={() => handleCategoryChange(category.id)}
+                    className={`
+                      px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
+                      ${selectedCategories.includes(category.id)
+                        ? 'bg-blue-500 text-white shadow-md'
+                        : 'border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-400 dark:hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400'
+                      }
+                    `}
                   >
-                    <input
-                      type="checkbox"
-                      checked={selectedCategories.includes(category.id)}
-                      onChange={() => handleCategoryChange(category.id)}
-                      className="w-4 h-4 text-purple-500 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-purple-500 focus:ring-2"
-                    />
-                    <span className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-purple-500 transition-colors">
-                      {category[language]}
-                    </span>
-                  </label>
+                    {category[language]}
+                  </button>
                 ))}
               </div>
             </div>
@@ -156,22 +155,21 @@ export default function FilterSearch({
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 {translations.types[language]}
               </h3>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="flex flex-wrap gap-2">
                 {types.map((type) => (
-                  <label
+                  <button
                     key={type.id}
-                    className="flex items-center space-x-2 cursor-pointer group"
+                    onClick={() => handleTypeChange(type.id)}
+                    className={`
+                      px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
+                      ${selectedTypes.includes(type.id)
+                        ? 'bg-blue-500 text-white shadow-md'
+                        : 'border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-blue-400 dark:hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400'
+                      }
+                    `}
                   >
-                    <input
-                      type="checkbox"
-                      checked={selectedTypes.includes(type.id)}
-                      onChange={() => handleTypeChange(type.id)}
-                      className="w-4 h-4 text-purple-500 bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-purple-500 focus:ring-2"
-                    />
-                    <span className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-purple-500 transition-colors">
-                      {type[language]}
-                    </span>
-                  </label>
+                    {type[language]}
+                  </button>
                 ))}
               </div>
             </div>
