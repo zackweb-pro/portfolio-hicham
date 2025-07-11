@@ -77,16 +77,36 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
       <div className="relative w-full max-w-6xl bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
         {/* Top Section - Title and Description */}
         <div className="p-6 bg-gray-900 text-white relative z-20">
-          <h2 className="text-2xl font-bold mb-2">{item.title[language]}</h2>
-          {item.description && (
-            <p className="text-gray-300 mb-4">{item.description[language]}</p>
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <h2 className="text-2xl font-bold mb-2">{item.title[language]}</h2>
+              {item.description && (
+                <p className="text-gray-300 mb-4">{item.description[language]}</p>
+              )}
+            </div>
+            
+            {/* Back Button - Only visible when details are showing */}
+            {showDetails && (
+              <button
+                onClick={handleHideDetails}
+                className="absolute top-4 right-20 z-30 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center text-white hover:text-blue-400 transition-colors"
+              >
+                <ArrowLeft size={24} />
+                
+              </button>
+            )}
+          </div>
+          
+          {/* Glowing line separator - Only visible when details are showing */}
+          {showDetails && (
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-70 shadow-lg shadow-blue-500/50 "></div>
           )}
         </div>
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-30 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center text-white transition-colors backdrop-blur-sm"
+          className="absolute top-4 right-4 z-30 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center text-white transition-colors backdrop-blur-sm hover:text-red-800"
         >
           <X size={24} />
         </button>
@@ -114,21 +134,8 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
             absolute inset-0 bg-gray-900 transform transition-transform duration-500 ease-in-out z-10
             ${showDetails ? 'translate-y-0' : 'translate-y-full'}
           `}>
-            {/* Details Header with Return Button */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-700">
-              <button
-                onClick={handleHideDetails}
-                className="flex items-center gap-2 text-white hover:text-blue-400 transition-colors"
-              >
-                <ArrowLeft size={20} />
-                <span>Back to Video</span>
-              </button>
-              <h3 className="text-xl font-bold text-white">Project Details</h3>
-              <div className="w-24"></div> {/* Spacer for centering */}
-            </div>
-
-            {/* Scrollable Content */}
-            <div className="h-full overflow-y-auto pb-6">
+            {/* Scrollable Content - No header */}
+            <div className="h-full overflow-y-auto">
               <div className="p-6">
                 {/* Detailed Description */}
                 <div className="mb-8">
