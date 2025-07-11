@@ -116,3 +116,8 @@
 .animate-glow {
   animation: glow 2s ease-in-out infinite alternate;
 }
+
+@keyframes progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
