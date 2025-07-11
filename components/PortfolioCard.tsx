@@ -42,8 +42,8 @@ export default function PortfolioCard({ item, onVideoClick }: PortfolioCardProps
         {/* Video Play Button */}
         {item.type === 'video' && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center backdrop-blur-sm">
-              <Play size={24} className="text-gray-900 ml-1" />
+            <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center backdrop-blur-sm dark:bg-gray-800/90">
+              <Play size={20} className="text-blue-900 dark:text-blue-400" />
             </div>
           </div>
         )}

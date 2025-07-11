@@ -86,7 +86,7 @@ export default function FilterSearch({
   const hasActiveFilters = selectedCategories.length > 0 || selectedTypes.length > 0 || searchQuery.length > 0;
 
   return (
-    <div className="mb-8">
+    <div className="">
       {/* Search and Filter Toggle */}
       <div className="flex flex-col sm:flex-row gap-4 mb-6">
         {/* Search Input */}
