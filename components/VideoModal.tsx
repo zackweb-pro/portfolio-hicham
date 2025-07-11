@@ -74,14 +74,14 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
 
   return (
     <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="relative w-full max-w-6xl bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
+      <div className="relative w-full max-w-6xl bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
         {/* Top Section - Title and Description */}
-        <div className="p-6 bg-gray-900 text-white relative z-20">
+        <div className="p-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-white relative z-20">
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <h2 className="text-2xl font-bold mb-2">{item.title[language]}</h2>
               {item.description && (
-                <p className="text-gray-300 mb-4">{item.description[language]}</p>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">{item.description[language]}</p>
               )}
             </div>
             
@@ -89,24 +89,23 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
             {showDetails && (
               <button
                 onClick={handleHideDetails}
-                className="absolute top-4 right-20 z-30 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center text-white hover:text-blue-400 transition-colors"
+                className="absolute top-4 right-20 z-30 w-12 h-12 bg-white/70 hover:bg-white/90 dark:bg-black/70 dark:hover:bg-black/90 rounded-full flex items-center justify-center text-gray-900 hover:text-blue-600 dark:text-white dark:hover:text-blue-400 transition-colors"
               >
                 <ArrowLeft size={24} />
-                
               </button>
             )}
           </div>
           
           {/* Glowing line separator - Only visible when details are showing */}
           {showDetails && (
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-70 shadow-lg shadow-blue-500/50 "></div>
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-70 shadow-lg shadow-blue-500/50"></div>
           )}
         </div>
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-30 w-12 h-12 bg-black/70 hover:bg-black/90 rounded-full flex items-center justify-center text-white transition-colors backdrop-blur-sm hover:text-red-800"
+          className="absolute top-4 right-4 z-30 w-12 h-12 bg-white/70 hover:bg-white/90 dark:bg-black/70 dark:hover:bg-black/90 rounded-full flex items-center justify-center text-gray-900 hover:text-red-600 dark:text-white dark:hover:text-red-400 transition-colors backdrop-blur-sm"
         >
           <X size={24} />
         </button>
@@ -131,7 +130,7 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
 
           {/* Sliding Details Section - Only covers video area */}
           <div className={`
-            absolute inset-0 bg-gray-900 transform transition-transform duration-500 ease-in-out z-10
+            absolute inset-0 bg-white dark:bg-gray-900 transform transition-transform duration-500 ease-in-out z-10
             ${showDetails ? 'translate-y-0' : 'translate-y-full'}
           `}>
             {/* Scrollable Content - No header */}
@@ -139,18 +138,18 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
               <div className="p-6">
                 {/* Detailed Description */}
                 <div className="mb-8">
-                  <h4 className="text-lg font-semibold text-white mb-4">Project Description</h4>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Project Description</h4>
                   <div className="prose prose-invert max-w-none">
-                    <p className="text-gray-300 leading-relaxed mb-4">
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                       This is a detailed description of the video project. Here you can include comprehensive information about the creative process, technical specifications, tools used, and the story behind the creation.
                     </p>
-                    <p className="text-gray-300 leading-relaxed mb-4">
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                       The project involved multiple stages of development including concept design, storyboarding, production, and post-production. Each phase required careful attention to detail and collaboration with various team members.
                     </p>
                     <div className="grid grid-cols-2 gap-4 my-6">
                       <div>
-                        <h5 className="text-white font-medium mb-2">Technical Details</h5>
-                        <ul className="text-gray-400 text-sm space-y-1">
+                        <h5 className="text-gray-900 dark:text-white font-medium mb-2">Technical Details</h5>
+                        <ul className="text-gray-500 dark:text-gray-400 text-sm space-y-1">
                           <li>Duration: 2:30 minutes</li>
                           <li>Resolution: 1920x1080</li>
                           <li>Frame Rate: 30fps</li>
@@ -158,8 +157,8 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
                         </ul>
                       </div>
                       <div>
-                        <h5 className="text-white font-medium mb-2">Tools Used</h5>
-                        <ul className="text-gray-400 text-sm space-y-1">
+                        <h5 className="text-gray-900 dark:text-white font-medium mb-2">Tools Used</h5>
+                        <ul className="text-gray-500 dark:text-gray-400 text-sm space-y-1">
                           <li>Adobe After Effects</li>
                           <li>Adobe Premiere Pro</li>
                           <li>Cinema 4D</li>
@@ -172,7 +171,7 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
 
                 {/* Project Steps Gallery using Gallery Component */}
                 <div className="mb-8">
-                  <div className="rounded-xl p-6 overflow-hidden">
+                  <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 overflow-hidden">
                     <div className="w-full">
                       <Gallery 
                         images={galleryImages}
@@ -189,7 +188,7 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
 
         {/* Bottom Section - Details Button */}
         {!showDetails && (
-          <div className="p-6 bg-gray-900 text-white relative z-20">
+          <div className="p-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-white relative z-20">
             <button
               onClick={handleShowDetails}
               className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
