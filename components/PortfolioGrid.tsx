@@ -307,14 +307,16 @@ export default function PortfolioGrid() {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {displayedItems.map((item) => (
-              <PortfolioCard
-                key={item.id}
-                item={item}
-                onVideoClick={handleMediaClick}
-              />
-            ))}
+          <div className="w-[80vw] mx-auto relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {displayedItems.map((item) => (
+                <PortfolioCard
+                  key={item.id}
+                  item={item}
+                  onVideoClick={handleMediaClick}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Load More Section */}
