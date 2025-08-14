@@ -121,5 +121,18 @@
   from { width: 0%; }
   to { width: 100%; }
 }
+.portfolio-card{
+  position: relative;
+}
 
-
+.portfolio-card::before{
+  content: "";
+  background: url('/assets/card-overlay.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
