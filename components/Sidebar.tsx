@@ -1,22 +1,28 @@
 "use client";
 
 import { Home, Briefcase, Mail, Sun, Moon, Globe } from 'lucide-react';
+import Link from 'next/link';
 import { useTheme } from '@/components/ThemeProvider';
 import { useLanguage } from '@/components/LanguageProvider';
 import { useModal } from '@/components/ModalProvider';
 
-export default function Sidebar() {
+
+interface SidebarProps {
+  activeItem?: 'home' | 'work' | 'contact';
+}
+
+export default function Sidebar({ activeItem }: SidebarProps) {
   const { language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const { isModalExpanded } = useModal();
 
   // Debug logging
-  console.log('Sidebar: isModalExpanded =', isModalExpanded);
+  // console.log('Sidebar: isModalExpanded =', isModalExpanded);
 
   const menuItems = [
-    { icon: Home, label: language === 'en' ? 'Home' : 'Accueil', active: false },
-    { icon: Briefcase, label: language === 'en' ? 'Works' : 'Travaux', active: true },
-    { icon: Mail, label: 'Contact', active: false },
+    { icon: Home, label: language === 'en' ? 'Home' : 'Accueil', href: '/', key: 'home' },
+    { icon: Briefcase, label: language === 'en' ? 'Works' : 'Travaux', href: '/work', key: 'work' },
+    { icon: Mail, label: 'Contact', href: '/contact', key: 'contact' },
   ];
 
   // Dynamic z-index based on modal state
@@ -41,19 +47,20 @@ export default function Sidebar() {
       <nav className="py-8 m-auto">
         <div className="space-y-4">
           {menuItems.map((item, index) => (
-            <div key={index} className="relative group">
-              <button
-                className={`
-                  w-12 h-12 flex items-center justify-center rounded-3xl mx-2 transition-all duration-300
-                  ${item.active 
-                    ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-white shadow-lg' 
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100/50 dark:hover:bg-white/10 hover:scale-105'
-                  }
-                `}
-              >
-                <item.icon size={20} />
-              </button>
-              
+            <div key={item.key} className="relative group">
+              <Link href={item.href} legacyBehavior>
+                <a
+                  className={`
+                    w-12 h-12 flex items-center justify-center rounded-3xl mx-2 transition-all duration-300
+                    ${activeItem === item.key
+                      ? 'bg-gradient-to-r from-blue-400 to-blue-600 text-white shadow-lg'
+                      : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100/50 dark:hover:bg-white/10 hover:scale-105'
+                    }
+                  `}
+                >
+                  <item.icon size={20} />
+                </a>
+              </Link>
               {/* Tooltip */}
               <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-900/90 dark:bg-white/80 text-white dark:text-black px-2 py-1 rounded text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap backdrop-blur-sm">
                 {item.label}
