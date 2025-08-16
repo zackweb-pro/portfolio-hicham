@@ -20,7 +20,7 @@ export default function Sidebar({ activeItem }: SidebarProps) {
   // console.log('Sidebar: isModalExpanded =', isModalExpanded);
 
   const menuItems = [
-    { icon: Home, label: language === 'en' ? 'Home' : 'Accueil', href: '/', key: 'home' },
+    { icon: Home, label: language === 'en' ? 'Home' : 'Accueil', href: '/home', key: 'home' },
     { icon: Briefcase, label: language === 'en' ? 'Works' : 'Travaux', href: '/work', key: 'work' },
     { icon: Mail, label: 'Contact', href: '/contact', key: 'contact' },
   ];

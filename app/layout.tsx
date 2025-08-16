@@ -16,8 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className={inter.className}>
+    <html lang="en" className="dark min-h-screen">
+    <head>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      <title>HICHAM ELJABBARY - PORTFOLIO</title>
+    </head>
+      <body style={{ minHeight: '100vh' }} className={inter.className}>
         <LanguageProvider>
           {children}
         </LanguageProvider>
