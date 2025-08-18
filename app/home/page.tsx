@@ -128,7 +128,7 @@ function SidebarPreview({ isVisible }: SidebarPreviewProps) {
 export default function HomePage() {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const handleWorkClick = (e) => {
+  const handleWorkClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsTransitioning(true);
     
