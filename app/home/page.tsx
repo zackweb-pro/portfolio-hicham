@@ -63,7 +63,7 @@ function SidebarPreview({ isVisible }) {
   ];
 
   return (
-    <div className={`fixed right-0 top-0 h-full w-20 bg-white/95 dark:bg-black/20 backdrop-blur-lg z-[50] flex flex-col justify-between align-items-center transition-transform duration-800 ease-in-out ${
+    <div className={`fixed right-0 top-0 h-full w-20 bg-white/95 dark:bg-black/20 backdrop-blur-lg z-[50] flex flex-col justify-between align-items-center transition-transform duration-1500 ease-in-out ${
       isVisible ? 'transform translate-x-0' : 'transform translate-x-full'
     }`}>
       {/* Vertical glowing line on the left side */}
@@ -150,7 +150,7 @@ export default function HomePage() {
 
       {/* Home Page (Foreground - Slides Out) */}
       <div 
-        className={`absolute inset-0 min-h-screen transition-all duration-800 ease-in-out z-20 ${
+        className={`absolute inset-0 min-h-screen transition-all duration-[1s] ease-in-out z-20 ${
           isTransitioning ? 'transform translate-x-full' : 'transform translate-x-0'
         }`}
         // style={{ backgroundColor: '#02050F' }}
@@ -218,13 +218,13 @@ export default function HomePage() {
               {/* Name with glowing effect - moved to top */}
               <h1 className="relative text-5xl md:text-6xl lg:text-7xl font-black mb-4">
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent blur-md opacity-70"></span>
-                <span className="relative bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent font-black">
+                <span className="relative bg-gradient-to-r from-blue-400 via-cyan-200 to-cyan-400 bg-clip-text text-transparent font-black">
                   HICHAM
                 </span>
               </h1>
               <h2 className="relative text-4xl md:text-5xl lg:text-6xl font-black mb-8">
                 <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent blur-md opacity-70"></span>
-                <span className="relative bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent font-black">
+                <span className="relative bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-100 bg-clip-text text-transparent font-black">
                   ELJABBARY
                 </span>
               </h2>
@@ -317,7 +317,7 @@ export default function HomePage() {
               
               <button
                 onClick={handleWorkClick}
-                className="group relative px-10 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 hover:from-blue-700 hover:via-purple-700 hover:to-cyan-700 text-white rounded-full text-xl font-bold flex items-center gap-3 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25 hover:scale-105"
+                className="group relative px-10 py-4 bg-gradient-to-r from-blue-600 via-blue-600 to-cyan-600 hover:from-blue-700 hover:via-blue-700 hover:to-cyan-700 text-white rounded-full text-xl font-bold flex items-center gap-3 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25 hover:scale-105"
                 disabled={isTransitioning}
               >
                 <span className="relative z-10"> My Work</span>

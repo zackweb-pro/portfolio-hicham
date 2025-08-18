@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search } from "lucide-react";
+import { User, Mail, MessageSquare } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 import Sidebar from "@/components/Sidebar";
 import { ModalProvider } from "@/components/ModalProvider";
@@ -85,42 +85,57 @@ export default function ContactPage() {
                   {translations.success[language]}
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="relative">
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  <div className="relative group">
                     <input
                       type="text"
-                      className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                      className="w-full pl-10 pr-4 py-3 bg-transparent border-0 border-b-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-transparent peer"
                       placeholder={translations.name[language]}
                       value={name}
                       onChange={e => setName(e.target.value)}
                       required
                     />
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" size={18} />
+                    <label className="absolute left-10 -top-3 text-sm text-gray-600 dark:text-gray-400 transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm peer-focus:text-blue-500">
+                      {translations.name[language]}
+                    </label>
+                    <User className="absolute left-0 top-3 text-gray-400 dark:text-gray-500 transition-colors duration-300 group-focus-within:text-blue-500" size={18} />
+                    {/* Animated underline */}
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 scale-x-0 transition-transform duration-300 group-focus-within:scale-x-100 w-full"></div>
                   </div>
-                  <div className="relative">
+                  <div className="relative group">
                     <input
                       type="email"
-                      className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                      className="w-full pl-10 pr-4 py-3 bg-transparent border-0 border-b-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 transition-all duration-300 placeholder-transparent peer"
                       placeholder={translations.email[language]}
                       value={email}
                       onChange={e => setEmail(e.target.value)}
                       required
                     />
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" size={18} />
+                    <label className="absolute left-10 -top-3 text-sm text-gray-600 dark:text-gray-400 transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3 peer-focus:-top-3 peer-focus:text-sm peer-focus:text-blue-500">
+                      {translations.email[language]}
+                    </label>
+                    <Mail className="absolute left-0 top-3 text-gray-400 dark:text-gray-500 transition-colors duration-300 group-focus-within:text-blue-500" size={18} />
+                    {/* Animated underline */}
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 scale-x-0 transition-transform duration-300 group-focus-within:scale-x-100 w-full"></div>
                   </div>
-                  <div className="relative">
+                  <div className="relative group">
                     <textarea
-                      className="w-full pl-10 pr-4 py-2 rounded-lg border-bottom border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition min-h-[120px] resize-none"
+                      className="w-full pl-10 pr-4 py-3 bg-transparent border-0 border-b-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 transition-all duration-300 min-h-[120px] resize-none placeholder-transparent peer"
                       placeholder={translations.message[language]}
                       value={message}
                       onChange={e => setMessage(e.target.value)}
                       required
                     />
-                    <Search className="absolute left-3 top-6 text-gray-400 dark:text-gray-500" size={18} />
+                    <label className="absolute left-10 top-0 text-sm text-gray-600 dark:text-gray-400 transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3 peer-focus:top-0 peer-focus:text-sm peer-focus:text-blue-500">
+                      {translations.message[language]}
+                    </label>
+                    <MessageSquare className="absolute left-0 top-3 text-gray-400 dark:text-gray-500 transition-colors duration-300 group-focus-within:text-blue-500" size={18} />
+                    {/* Animated underline - positioned at the bottom of the textarea */}
+                    <div className="absolute bottom-[6px] left-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 scale-x-0 transition-transform duration-300 group-focus-within:scale-x-100 w-full"></div>
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition"
+                    className="w-full py-3 mt-8 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25"
                   >
                     {translations.send[language]}
                   </button>
