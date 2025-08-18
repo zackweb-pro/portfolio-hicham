@@ -55,7 +55,11 @@ function WorkPagePreview() {
   );
 }
 
-function SidebarPreview({ isVisible }) {
+interface SidebarPreviewProps {
+  isVisible: boolean;
+}
+
+function SidebarPreview({ isVisible }: SidebarPreviewProps) {
   const menuItems = [
     { icon: Home, label: 'Home', key: 'home' },
     { icon: Briefcase, label: 'Works', key: 'work' },
