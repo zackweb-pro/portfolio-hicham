@@ -135,59 +135,210 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden"
+
+    >
       {/* Work Page Preview (Behind) */}
       <div className="absolute inset-0">
         <WorkPagePreview />
       </div>
 
       {/* Sidebar (Slides in from right) */}
-      <SidebarPreview isVisible={isTransitioning} />
+      <SidebarPreview isVisible={isTransitioning}
+      
+      />
 
       {/* Home Page (Foreground - Slides Out) */}
       <div 
-        className={`absolute inset-0 min-h-screen flex flex-col justify-center items-center transition-all duration-800 ease-in-out z-20 ${
+        className={`absolute inset-0 min-h-screen transition-all duration-800 ease-in-out z-20 ${
           isTransitioning ? 'transform translate-x-full' : 'transform translate-x-0'
         }`}
-        style={{ backgroundColor: '#02050F' }}
+        // style={{ backgroundColor: '#02050F' }}
+                    style={{ 
+                     backgroundColor: "#02050F",
+  backgroundImage:`
+    radial-gradient(circle at 10% 20%, rgba(50, 50, 50, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(40, 40, 40, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 30% 60%, rgba(60, 60, 60, 0.2) 0%, transparent 40%)"`,
+  backgroundSize: "cover", /* Ensures the background covers the entire element */
+  backgroundAttachment: "fixed", /* Keeps the background fixed when scrolling */
+        }}
       >
-        <div className="min-h-screen flex col justify-center items-center relative left-[15%] w-[500px] flex flex-col items-center justify-center flex-1 z-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 text-blue-900 dark:text-blue-300  ">
-            Designer with over 10 years of experience in motion graphics
-          </h1>
-          <Image
-          src="/assets/arrow.png"
-          alt="Arrow"
-          width={100}
-          height={100}
-            objectFit="contain"
-            className="arrow-point rounded-full shadow-2xl"
-            priority
-          />
+        {/* Background Text Effect Behind Image */}
+        <div className="absolute inset-0 overflow-hidden opacity-10">
+          <div className="absolute bottom-32 left-0 text-[150px] font-black text-blue-500/20 whitespace-nowrap transform -rotate-12">
+            MOTION GRAPHICS
+          </div>
+          <div className="absolute bottom-64 left-0 text-[120px] font-black text-purple-500/15 whitespace-nowrap transform rotate-6">
+            3D ANIMATION
+          </div>
+        </div>
 
-        
-          <button
-            onClick={handleWorkClick}
-            className="mt-2 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-lg font-semibold flex items-center gap-2 transition shadow-lg cursor-pointer"
-            disabled={isTransitioning}
-          >
-            Explore
-            <ArrowRight size={22} className="ml-1 animate-bounce-right" />
-          </button>
+        {/* Professional Background Text - Top and Right */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
+          {/* Top area floating text */}
+          <div className="absolute top-20 right-10 text-8xl font-black text-gray-800 transform rotate-12">
+            MOTION
+          </div>
+          <div className="absolute top-32 right-40 text-6xl font-bold text-gray-700 transform -rotate-6">
+            GRAPHICS
+          </div>
+          <div className="absolute top-60 right-20 text-4xl font-semibold text-gray-800 transform rotate-3">
+            DESIGNER
+          </div>
           
-          {/* <div className="mt-4 flex flex-col items-center">
-            <ArrowRight size={36} className="text-blue-500 animate-bounce-right" style={{ transform: 'rotate(90deg)' }} />
-            <span className="text-gray-500 dark:text-gray-400 text-sm mt-2">Go to Works</span>
-          </div> */}
+          {/* Right side floating text */}
+          <div className="absolute top-1/3 right-5 text-7xl font-black text-gray-800 transform rotate-45">
+            3D
+          </div>
+          <div className="absolute top-2/3 right-32 text-5xl font-bold text-gray-700 transform -rotate-12">
+            ANIMATION
+          </div>
+          <div className="absolute bottom-40 right-8 text-9xl font-black text-gray-800 transform rotate-6">
+            CREATIVE
+          </div>
+          
+          {/* Additional scattered text for depth */}
+          <div className="absolute top-96 right-64 text-3xl font-medium text-gray-700 transform rotate-45">
+            RENDER
+          </div>
+          <div className="absolute top-80 right-12 text-2xl font-light text-gray-700 transform -rotate-30">
+            VISUAL
+          </div>
+          <div className="absolute bottom-60 right-48 text-6xl font-bold text-gray-700 transform rotate-15">
+            EFFECTS
+          </div>
+        </div>
+
+        {/* Main Content Area */}
+        <div className="min-h-screen flex relative z-10">
+          {/* Left Section - Name and Title at Top */}
+          <div className="flex-1 flex flex-col px-8 lg:px-16 pt-16">
+            <div className="max-w-2xl">
+              {/* Name with glowing effect - moved to top */}
+              <h1 className="relative text-5xl md:text-6xl lg:text-7xl font-black mb-4">
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent blur-md opacity-70"></span>
+                <span className="relative bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent font-black">
+                  HICHAM
+                </span>
+              </h1>
+              <h2 className="relative text-4xl md:text-5xl lg:text-6xl font-black mb-8">
+                <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent blur-md opacity-70"></span>
+                <span className="relative bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent font-black">
+                  ELJABBARY
+                </span>
+              </h2>
+
+              {/* Professional Title */}
+              <div className="mb-8">
+                <p className="text-2xl md:text-3xl font-bold text-blue-300 mb-2">
+                  Motion Graphics Designer
+                </p>
+                <p className="text-lg text-gray-300 font-medium">
+                  10+ Years of Industry Excellence
+                </p>
+              </div>
+
+              {/* Key Skills */}
+              <div className="mb-8 space-y-3">
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  <p className="text-gray-300 text-lg">2D & 3D Animation Specialist</p>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                  <p className="text-gray-300 text-lg">Original Motion Graphics Concepts</p>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                  <p className="text-gray-300 text-lg">Color Rendering & Correction</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Section - CTA and Arrow */}
+          <div className="flex flex-col justify-center items-center px-8 w-96 mr-[300px]">
+            {/* Professional Skills Tags - Above CTA */}
+            <div className="mb-8 w-80">
+              {/* Skills as floating tag elements */}
+              <div className="flex flex-wrap gap-4 justify-center">
+                <div className="px-5 py-3 bg-gradient-to-r from-blue-500/30 to-blue-400/30 border border-blue-400/40 rounded-full backdrop-blur-lg hover:scale-110 transition-all duration-300 group shadow-lg hover:shadow-blue-400/25">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                    <span className="text-blue-300 text-sm font-semibold">Time Expert</span>
+                  </div>
+                </div>
+                
+                <div className="px-5 py-3 bg-gradient-to-r from-purple-500/30 to-purple-400/30 border border-purple-400/40 rounded-full backdrop-blur-lg hover:scale-110 transition-all duration-300 group shadow-lg hover:shadow-purple-400/25">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
+                    <span className="text-purple-300 text-sm font-semibold">Client Pro</span>
+                  </div>
+                </div>
+                
+                <div className="px-5 py-3 bg-gradient-to-r from-cyan-500/30 to-cyan-400/30 border border-cyan-400/40 rounded-full backdrop-blur-lg hover:scale-110 transition-all duration-300 group shadow-lg hover:shadow-cyan-400/25">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
+                    <span className="text-cyan-300 text-sm font-semibold">3D Master</span>
+                  </div>
+                </div>
+                
+                <div className="px-5 py-3 bg-gradient-to-r from-indigo-500/30 to-indigo-400/30 border border-indigo-400/40 rounded-full backdrop-blur-lg hover:scale-110 transition-all duration-300 group shadow-lg hover:shadow-indigo-400/25">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" style={{ animationDelay: '0.9s' }}></div>
+                    <span className="text-indigo-300 text-sm font-semibold">Strategist</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center space-y-4">
+              {/* Text above arrow */}
+              <div className="text-center mb-2">
+                <p className="text-blue-300 text-lg font-semibold animate-pulse">
+                  Click to Explore
+                </p>
+                <div className="flex justify-center mt-1">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full mr-1 animate-bounce"></div>
+                  <div className="w-2 h-2 bg-purple-400 rounded-full mr-1 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                </div>
+              </div>
+
+              <Image
+                src="/assets/arrow.png"
+                alt="Arrow"
+                width={100}
+                height={100}
+                className="arrow-point"
+                priority
+              />
+              
+              <button
+                onClick={handleWorkClick}
+                className="group relative px-10 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 hover:from-blue-700 hover:via-purple-700 hover:to-cyan-700 text-white rounded-full text-xl font-bold flex items-center gap-3 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25 hover:scale-105"
+                disabled={isTransitioning}
+              >
+                <span className="relative z-10"> My Work</span>
+                <ArrowRight size={24} className="ml-1 animate-bounce-right group-hover:translate-x-1 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+              </button>
+              
+              <p className="text-gray-400 text-sm italic mt-2">
+                &ldquo;Detail-oriented • Creative • Team Player&rdquo;
+              </p>
+            </div>
+          </div>
         </div>
         
-        <div className="absolute bottom-0 left-[10%] w-[700px] h-[700px]">
+        {/* Keep the original image position and size */}
+        <div className="absolute bottom-0 left-[15%] w-[800px] h-[800px]">
           <Image
             src="/assets/me.png"
-            alt="Me"
+            alt="Hicham Eljabbary"
             layout="fill"
             objectFit="contain"
-       
             priority
           />
         </div>

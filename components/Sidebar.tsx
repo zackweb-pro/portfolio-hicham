@@ -2,19 +2,26 @@
 
 import { Home, Briefcase, Mail, Sun, Moon, Globe } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTheme } from '@/components/ThemeProvider';
 import { useLanguage } from '@/components/LanguageProvider';
 import { useModal } from '@/components/ModalProvider';
 
-
-interface SidebarProps {
-  activeItem?: 'home' | 'work' | 'contact';
-}
-
-export default function Sidebar({ activeItem }: SidebarProps) {
+export default function Sidebar() {
+  const pathname = usePathname();
   const { language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const { isModalExpanded } = useModal();
+
+  // Determine active item based on current pathname
+  const getActiveItem = () => {
+    if (pathname === '/home') return 'home';
+    if (pathname === '/work') return 'work';
+    if (pathname === '/contact') return 'contact';
+    return null;
+  };
+
+  const activeItem = getActiveItem();
 
   // Debug logging
   // console.log('Sidebar: isModalExpanded =', isModalExpanded);

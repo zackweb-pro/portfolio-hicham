@@ -110,7 +110,7 @@ export default function ContactPage() {
                   </div>
                   <div className="relative">
                     <textarea
-                      className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition min-h-[120px] resize-none"
+                      className="w-full pl-10 pr-4 py-2 rounded-lg border-bottom border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-400 transition min-h-[120px] resize-none"
                       placeholder={translations.message[language]}
                       value={message}
                       onChange={e => setMessage(e.target.value)}
@@ -128,7 +128,7 @@ export default function ContactPage() {
               )}
             </div>
           </div>
-          <Sidebar activeItem="contact" />
+          <Sidebar />
         </div>
       </ModalProvider>
     </ThemeProvider>

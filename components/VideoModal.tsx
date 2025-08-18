@@ -166,7 +166,7 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
     <>
       {/* Main Modal */}
       <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-        <div className="relative w-full max-w-6xl bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
+        <div className="relative w-full max-w-[1400px] bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
           {/* Top Section - Title and Description */}
           <div className="p-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-white relative z-20">
             <div className="flex items-start justify-between">

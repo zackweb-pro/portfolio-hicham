@@ -58,7 +58,7 @@ function PageContent() {
           </div>
         </div>
         {/* Sidebar - Now inside ModalProvider context */}
-        <Sidebar activeItem="work" />
+        <Sidebar />
       </div>
     </div>
   );
