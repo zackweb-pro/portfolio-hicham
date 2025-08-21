@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ArrowRight, Home, Briefcase, Mail, Users, Sun, Moon, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -278,6 +279,7 @@ export default function HomePage() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [previewPage, setPreviewPage] = useState<'work' | 'contact' | null>(null);
   const { language } = useLanguage();
+  const router = useRouter();
 
   // Top controls component for language and theme switching
   const TopControls = () => {
@@ -380,7 +382,7 @@ export default function HomePage() {
     
     // Navigate after animation completes
     setTimeout(() => {
-      window.location.href = "/work";
+      router.push("/work");
     }, 1600); // Slightly longer to let sidebar animation complete
   };
 
@@ -391,7 +393,7 @@ export default function HomePage() {
     
     // Navigate after animation completes
     setTimeout(() => {
-      window.location.href = "/contact";
+      router.push("/contact");
     }, 1600); // Same timing as work button
   };
 
