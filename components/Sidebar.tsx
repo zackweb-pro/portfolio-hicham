@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Briefcase, Mail, Sun, Moon, Globe } from 'lucide-react';
+import { Home, Briefcase, Mail, Sun, Moon, Globe, Users } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from '@/components/ThemeProvider';
@@ -17,6 +17,7 @@ export default function Sidebar() {
   const getActiveItem = () => {
     if (pathname === '/home') return 'home';
     if (pathname === '/work') return 'work';
+    if (pathname === '/clients') return 'clients';
     if (pathname === '/contact') return 'contact';
     return null;
   };
@@ -29,6 +30,7 @@ export default function Sidebar() {
   const menuItems = [
     { icon: Home, label: language === 'en' ? 'Home' : 'Accueil', href: '/home', key: 'home' },
     { icon: Briefcase, label: language === 'en' ? 'Works' : 'Travaux', href: '/work', key: 'work' },
+    { icon: Users, label: 'Clients', href: '/clients', key: 'clients' },
     { icon: Mail, label: 'Contact', href: '/contact', key: 'contact' },
   ];
 

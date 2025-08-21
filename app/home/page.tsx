@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Home, Briefcase, Mail, Sun, Moon, Globe } from "lucide-react";
+import { ArrowRight, Home, Briefcase, Mail, Users, Sun, Moon, Globe } from "lucide-react";
 import { useState } from "react";
 
 // Mock components for the work page preview
@@ -40,13 +40,57 @@ function WorkPagePreview() {
               </h1>
             </div>
             
-            {/* Portfolio Grid Placeholder */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-              {[1, 2, 3, 4, 5, 6].map((item) => (
-                <div key={item} className="bg-white/10 dark:bg-white/5 backdrop-blur-sm rounded-lg h-64 flex items-center justify-center border border-white/20">
-                  <div className="text-gray-400 dark:text-gray-600 text-lg font-medium">Project {item}</div>
-                </div>
-              ))}
+            {/* Portfolio Grid Placeholder - Matching PortfolioCard styling */}
+            <div className="w-[75vw] mx-auto m-[90px] relative">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
+                  <div key={item} className="portfolio-card group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500">
+                    {/* Content matching PortfolioCard structure */}
+                    <div className="relative bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-xl">
+                      {/* Image/Thumbnail skeleton */}
+                      <div className="aspect-video overflow-hidden relative">
+                        <div className="w-full h-full bg-gradient-to-r from-gray-200/60 via-gray-300/80 to-gray-200/60 dark:from-gray-700/60 dark:via-gray-600/80 dark:to-gray-700/60 animate-pulse">
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer"></div>
+                        </div>
+                      </div>
+
+                      {/* Video Play Button skeleton for some cards */}
+                      {(item === 2 || item === 5 || item === 8) && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="w-10 h-10 bg-white/90 dark:bg-gray-800/90 rounded-full flex items-center justify-center backdrop-blur-sm animate-pulse">
+                            <div className="w-5 h-5 bg-blue-900/20 dark:bg-blue-400/20 rounded animate-pulse"></div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Title Overlay skeleton */}
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 transform transition-transform duration-300 group-hover:translate-y-0 translate-y-full">
+                        {/* Title skeleton */}
+                        <div className="h-5 bg-white/20 rounded mb-2 animate-pulse w-3/4">
+                          <div className="h-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer rounded"></div>
+                        </div>
+                        {/* Description skeleton */}
+                        <div className="h-4 bg-white/15 rounded animate-pulse w-full">
+                          <div className="h-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer rounded"></div>
+                        </div>
+                      </div>
+
+                      {/* Type indicator skeleton */}
+                      <div className="absolute top-4 right-4">
+                        <div className="w-8 h-8 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                          <div className={`w-4 h-4 rounded ${
+                            item === 2 || item === 5 || item === 8 
+                              ? 'bg-red-500/30' 
+                              : item === 3 || item === 6 || item === 9
+                                ? 'bg-green-500/30'
+                                : 'bg-blue-500/30'
+                          } animate-pulse`}></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -63,13 +107,17 @@ function SidebarPreview({ isVisible }: SidebarPreviewProps) {
   const menuItems = [
     { icon: Home, label: 'Home', key: 'home' },
     { icon: Briefcase, label: 'Works', key: 'work' },
-    { icon: Mail, label: 'Contact', key: 'contact' },
+        { icon: Users, label: 'Clients', href: '/clients', key: 'clients' },
+    { icon: Mail, label: 'Contact', href: '/contact', key: 'contact' },
   ];
 
   return (
     <div className={`fixed right-0 top-0 h-full w-20 bg-white/95 dark:bg-black/20 backdrop-blur-lg z-[50] flex flex-col justify-between align-items-center transition-transform duration-1500 ease-in-out ${
       isVisible ? 'transform translate-x-0' : 'transform translate-x-full'
-    }`}>
+    }`}
+    style={{
+      transition: "transform 1s ease-in-out",
+    }}>
       {/* Vertical glowing line on the left side */}
       <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent opacity-70 shadow-lg shadow-blue-500/50"></div>
       
@@ -135,7 +183,17 @@ export default function HomePage() {
     // Navigate after animation completes
     setTimeout(() => {
       window.location.href = "/work";
-    }, 1000); // Slightly longer to let sidebar animation complete
+    }, 1600); // Slightly longer to let sidebar animation complete
+  };
+
+  const handleContactClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsTransitioning(true);
+    
+    // Navigate after animation completes
+    setTimeout(() => {
+      window.location.href = "/contact";
+    }, 1600); // Same timing as work button
   };
 
   return (
@@ -154,11 +212,12 @@ export default function HomePage() {
 
       {/* Home Page (Foreground - Slides Out) */}
       <div 
-        className={`absolute inset-0 min-h-screen transition-all duration-[1s] ease-in-out z-20 ${
-          isTransitioning ? 'transform translate-x-full' : 'transform translate-x-0'
+        className={`absolute inset-0 min-h-screen transition-transform duration-[1.5s] ease-in-out z-20 ${
+          isTransitioning ? 'translate-x-full' : 'translate-x-0'
         }`}
         // style={{ backgroundColor: '#02050F' }}
                     style={{ 
+                      transition: "800ms all ease-in-out",
                      backgroundColor: "#02050F",
   backgroundImage:`
     radial-gradient(circle at 10% 20%, rgba(50, 50, 50, 0.3) 0%, transparent 50%),
@@ -216,53 +275,8 @@ export default function HomePage() {
 
         {/* Main Content Area */}
         <div className="min-h-screen flex relative z-10">
-          {/* Left Section - Name and Title at Top */}
-          <div className="flex-1 flex flex-col px-8 lg:px-16 pt-16">
-            <div className="max-w-2xl">
-              {/* Name with glowing effect - moved to top */}
-              <h1 className="relative text-5xl md:text-6xl lg:text-7xl font-black mb-4">
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent blur-md opacity-70"></span>
-                <span className="relative bg-gradient-to-r from-blue-400 via-cyan-200 to-cyan-400 bg-clip-text text-transparent font-black">
-                  HICHAM
-                </span>
-              </h1>
-              <h2 className="relative text-4xl md:text-5xl lg:text-6xl font-black mb-8">
-                <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent blur-md opacity-70"></span>
-                <span className="relative bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-100 bg-clip-text text-transparent font-black">
-                  ELJABBARY
-                </span>
-              </h2>
-
-              {/* Professional Title */}
-              <div className="mb-8">
-                <p className="text-2xl md:text-3xl font-bold text-blue-300 mb-2">
-                  Motion Graphics Designer
-                </p>
-                <p className="text-lg text-gray-300 font-medium">
-                  10+ Years of Industry Excellence
-                </p>
-              </div>
-
-              {/* Key Skills */}
-              <div className="mb-8 space-y-3">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                  <p className="text-gray-300 text-lg">2D & 3D Animation Specialist</p>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                  <p className="text-gray-300 text-lg">Original Motion Graphics Concepts</p>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-                  <p className="text-gray-300 text-lg">Color Rendering & Correction</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Section - CTA and Arrow */}
-          <div className="flex flex-col justify-center items-center px-8 w-96 mr-[300px]">
+          {/* Left Section - CTA and Skills */}
+          <div className="flex flex-col justify-center items-center px-8 w-96 ml-[100px]">
             {/* Professional Skills Tags - Above CTA */}
             <div className="mb-8 w-80">
               {/* Skills as floating tag elements */}
@@ -328,10 +342,65 @@ export default function HomePage() {
                 <ArrowRight size={24} className="ml-1 animate-bounce-right group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
               </button>
+
+              <button
+                onClick={handleContactClick}
+                className="group relative px-10 py-4 bg-gradient-to-r from-green-600 via-green-600 to-emerald-600 hover:from-green-700 hover:via-green-700 hover:to-emerald-700 text-white rounded-full text-xl font-bold flex items-center gap-3 transition-all duration-300 shadow-2xl hover:shadow-green-500/25 hover:scale-105"
+                disabled={isTransitioning}
+              >
+                <span className="relative z-10">Contact Me</span>
+                <ArrowRight size={24} className="ml-1 animate-bounce-right group-hover:translate-x-1 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+              </button>
               
               <p className="text-gray-400 text-sm italic mt-2">
                 &ldquo;Detail-oriented • Creative • Team Player&rdquo;
               </p>
+            </div>
+          </div>
+
+          {/* Right Section - Name and Title in Center */}
+          <div className="flex-1 flex flex-col justify-center items-center px-8 lg:px-16">
+            <div className="max-w-2xl text-center">
+              {/* Name with glowing effect - centered */}
+              <h1 className="relative text-5xl md:text-6xl lg:text-7xl font-black mb-4">
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent blur-md opacity-70"></span>
+                <span className="relative bg-gradient-to-r from-blue-400 via-cyan-200 to-cyan-400 bg-clip-text text-transparent font-black">
+                  HICHAM
+                </span>
+              </h1>
+              <h2 className="relative text-4xl md:text-5xl lg:text-6xl font-black mb-8">
+                <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-400 bg-clip-text text-transparent blur-md opacity-70"></span>
+                <span className="relative bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-100 bg-clip-text text-transparent font-black">
+                  ELJABBARY
+                </span>
+              </h2>
+
+              {/* Professional Title */}
+              <div className="mb-8">
+                <p className="text-2xl md:text-3xl font-bold text-blue-300 mb-2">
+                  Motion Graphics Designer
+                </p>
+                <p className="text-lg text-gray-300 font-medium">
+                  10+ Years of Industry Excellence
+                </p>
+              </div>
+
+              {/* Key Skills */}
+              <div className="mb-8 space-y-3">
+                <div className="flex items-center justify-center space-x-3">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                  <p className="text-gray-300 text-lg">2D & 3D Animation Specialist</p>
+                </div>
+                <div className="flex items-center justify-center space-x-3">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                  <p className="text-gray-300 text-lg">Original Motion Graphics Concepts</p>
+                </div>
+                <div className="flex items-center justify-center space-x-3">
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                  <p className="text-gray-300 text-lg">Color Rendering & Correction</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

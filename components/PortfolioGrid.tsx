@@ -307,7 +307,7 @@ export default function PortfolioGrid() {
         </div>
       ) : (
         <>
-          <div className="w-[80vw] mx-auto relative">
+          <div className="w-[75vw] mx-auto relative">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {displayedItems.map((item) => (
                 <PortfolioCard
