@@ -444,8 +444,17 @@ function HomePageContent({
       setLanguage(language === 'en' ? 'fr' : 'en');
     };
 
+    // Slide out when preview page is active
+    const isSliding = previewPage !== null;
+
     return (
-      <div className="fixed top-6 right-6 z-30 flex items-center gap-3">
+      <div className={`fixed top-6 right-6 z-30 flex items-center gap-3 transition-transform duration-1500 ease-in-out ${
+        isSliding ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100'
+      }`}
+      style={{
+        transition: "all 1s ease-in-out",
+      }}
+      >
         {/* Language Switcher */}
         <button
           onClick={handleLanguageToggle}
@@ -491,6 +500,9 @@ function HomePageContent({
           ? 'bg-gradient-to-br from-gray-900 via-black to-gray-900' 
           : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
         }`}
+        style={{
+        transition: "all 1s ease-in-out",
+      }}
   
       >
         {/* Background Text Effect Behind Image */}
