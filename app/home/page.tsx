@@ -582,28 +582,28 @@ function HomePageContent({
                 <div className="px-5 py-3 bg-gradient-to-r from-blue-500/30 to-blue-400/30 border border-blue-400/40 rounded-full backdrop-blur-lg hover:scale-110 transition-all duration-300 group shadow-lg hover:shadow-blue-400/25">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                    <span className="text-blue-300 text-sm font-semibold">{translations.skillTags[language].timeExpert}</span>
+                    <span className="text-blue-600 dark:text-blue-300 text-sm font-semibold">{translations.skillTags[language].timeExpert}</span>
                   </div>
                 </div>
                 
                 <div className="px-5 py-3 bg-gradient-to-r from-purple-500/30 to-purple-400/30 border border-purple-400/40 rounded-full backdrop-blur-lg hover:scale-110 transition-all duration-300 group shadow-lg hover:shadow-purple-400/25">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
-                    <span className="text-purple-300 text-sm font-semibold">{translations.skillTags[language].clientPro}</span>
+                    <span className="text-purple-600 dark:text-purple-300 text-sm font-semibold">{translations.skillTags[language].clientPro}</span>
                   </div>
                 </div>
                 
                 <div className="px-5 py-3 bg-gradient-to-r from-cyan-500/30 to-cyan-400/30 border border-cyan-400/40 rounded-full backdrop-blur-lg hover:scale-110 transition-all duration-300 group shadow-lg hover:shadow-cyan-400/25">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
-                    <span className="text-cyan-300 text-sm font-semibold">{translations.skillTags[language].master3d}</span>
+                    <span className="text-cyan-600 dark:text-cyan-300 text-sm font-semibold">{translations.skillTags[language].master3d}</span>
                   </div>
                 </div>
                 
                 <div className="px-5 py-3 bg-gradient-to-r from-indigo-500/30 to-indigo-400/30 border border-indigo-400/40 rounded-full backdrop-blur-lg hover:scale-110 transition-all duration-300 group shadow-lg hover:shadow-indigo-400/25">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" style={{ animationDelay: '0.9s' }}></div>
-                    <span className="text-indigo-300 text-sm font-semibold">{translations.skillTags[language].strategist}</span>
+                    <span className="text-indigo-600 dark:text-indigo-300 text-sm font-semibold">{translations.skillTags[language].strategist}</span>
                   </div>
                 </div>
               </div>
