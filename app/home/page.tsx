@@ -462,7 +462,7 @@ export default function HomePage() {
           </div>
 
           {/* Right Section - Name and Title in Center */}
-          <div className="flex-1 flex flex-col justify-center items-center px-8 lg:px-16">
+          <div className="flex-1 flex flex-col justify-center items-end px-8 lg:px-16 mr-[200px]">
             <div className="max-w-2xl text-center">
               {/* Name with glowing effect - centered */}
               <h1 className="relative text-5xl md:text-6xl lg:text-7xl font-black mb-4">
@@ -508,7 +508,7 @@ export default function HomePage() {
         </div>
         
         {/* Keep the original image position and size */}
-        <div className="absolute bottom-0 left-[15%] w-[800px] h-[800px]">
+        <div className="absolute bottom-0 left-[20%] w-[800px] h-[800px]">
           <Image
             src="/assets/me.png"
             alt="Hicham Eljabbary"
