@@ -449,7 +449,7 @@ function HomePageContent({
         {/* Language Switcher */}
         <button
           onClick={handleLanguageToggle}
-          className="flex items-center gap-2 px-4 py-2 bg-white/10 dark:bg-black/10 backdrop-blur-lg border border-white/20 dark:border-gray-700/50 rounded-full text-white hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 hover:scale-105 shadow-lg"
+          className="flex items-center gap-2 px-4 py-2 bg-white/90 dark:bg-black/80 backdrop-blur-lg border border-gray-300/50 dark:border-gray-700/50 rounded-full text-gray-800 dark:text-white hover:bg-white dark:hover:bg-black/90 transition-all duration-300 hover:scale-105 shadow-lg"
         >
           <Globe size={18} />
           <span className="text-sm font-medium uppercase">{language}</span>
@@ -458,7 +458,7 @@ function HomePageContent({
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
-          className="flex items-center justify-center w-10 h-10 bg-white/10 dark:bg-black/10 backdrop-blur-lg border border-white/20 dark:border-gray-700/50 rounded-full text-white hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 hover:scale-105 shadow-lg"
+          className="flex items-center justify-center w-10 h-10 bg-white/90 dark:bg-black/80 backdrop-blur-lg border border-gray-300/50 dark:border-gray-700/50 rounded-full text-gray-800 dark:text-white hover:bg-white dark:hover:bg-black/90 transition-all duration-300 hover:scale-105 shadow-lg"
         >
           {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
         </button>
@@ -507,51 +507,51 @@ function HomePageContent({
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
           {/* Top area floating text */}
           <div className={`absolute top-20 right-10 text-8xl font-black transform rotate-12 ${
-            theme === 'dark' ? 'text-gray-800' : 'text-gray-300'
+            theme === 'dark' ? 'text-gray-800' : 'text-gray-500'
           }`}>
             MOTION
           </div>
           <div className={`absolute top-32 right-40 text-6xl font-bold transform -rotate-6 ${
-            theme === 'dark' ? 'text-gray-700' : 'text-gray-400'
+            theme === 'dark' ? 'text-gray-700' : 'text-gray-600'
           }`}>
             GRAPHICS
           </div>
           <div className={`absolute top-60 right-20 text-4xl font-semibold transform rotate-3 ${
-            theme === 'dark' ? 'text-gray-800' : 'text-gray-300'
+            theme === 'dark' ? 'text-gray-800' : 'text-gray-500'
           }`}>
             DESIGNER
           </div>
           
           {/* Right side floating text */}
           <div className={`absolute top-1/3 right-5 text-7xl font-black transform rotate-45 ${
-            theme === 'dark' ? 'text-gray-800' : 'text-gray-300'
+            theme === 'dark' ? 'text-gray-800' : 'text-gray-500'
           }`}>
             3D
           </div>
           <div className={`absolute top-2/3 right-32 text-5xl font-bold transform -rotate-12 ${
-            theme === 'dark' ? 'text-gray-700' : 'text-gray-400'
+            theme === 'dark' ? 'text-gray-700' : 'text-gray-600'
           }`}>
             ANIMATION
           </div>
           <div className={`absolute bottom-40 right-8 text-9xl font-black transform rotate-6 ${
-            theme === 'dark' ? 'text-gray-800' : 'text-gray-300'
+            theme === 'dark' ? 'text-gray-800' : 'text-gray-500'
           }`}>
             CREATIVE
           </div>
           
           {/* Additional scattered text for depth */}
           <div className={`absolute top-96 right-64 text-3xl font-medium transform rotate-45 ${
-            theme === 'dark' ? 'text-gray-700' : 'text-gray-400'
+            theme === 'dark' ? 'text-gray-700' : 'text-gray-600'
           }`}>
             RENDER
           </div>
           <div className={`absolute top-80 right-12 text-2xl font-light transform -rotate-30 ${
-            theme === 'dark' ? 'text-gray-700' : 'text-gray-400'
+            theme === 'dark' ? 'text-gray-700' : 'text-gray-600'
           }`}>
             VISUAL
           </div>
           <div className={`absolute bottom-60 right-48 text-6xl font-bold transform rotate-15 ${
-            theme === 'dark' ? 'text-gray-700' : 'text-gray-400'
+            theme === 'dark' ? 'text-gray-700' : 'text-gray-600'
           }`}>
             EFFECTS
           </div>
@@ -598,7 +598,7 @@ function HomePageContent({
             <div className="flex flex-col items-center space-y-4">
               {/* Text above arrow */}
               <div className="text-center mb-2">
-                <p className="text-blue-300 text-lg font-semibold animate-pulse">
+                <p className="text-blue-600 dark:text-blue-300 text-lg font-semibold animate-pulse">
                   {translations.buttons[language].explore}
                 </p>
                 <div className="flex justify-center mt-1">
@@ -637,7 +637,7 @@ function HomePageContent({
                 <div className="absolute inset-0 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
               </button>
               
-              <p className="text-gray-500 dark:text-gray-400 text-sm italic mt-2">
+              <p className="text-gray-700 dark:text-gray-400 text-sm italic mt-2">
                 &ldquo;{translations.quote[language]}&rdquo;
               </p>
             </div>
@@ -662,10 +662,10 @@ function HomePageContent({
 
               {/* Professional Title */}
               <div className="mb-8">
-                <p className="text-2xl md:text-3xl font-bold text-blue-300 dark:text-blue-300 mb-2">
+                <p className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-300 mb-2">
                   {translations.title[language]}
                 </p>
-                <p className="text-lg text-gray-600 dark:text-gray-300 font-medium">
+                <p className="text-lg text-gray-800 dark:text-gray-300 font-medium">
                   {translations.subtitle[language]}
                 </p>
               </div>
@@ -674,15 +674,15 @@ function HomePageContent({
               <div className="mb-8 space-y-3">
                 <div className="flex items-center justify-center space-x-3">
                   <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                  <p className="text-gray-600 dark:text-gray-300 text-lg">{translations.skills[language].animation}</p>
+                  <p className="text-gray-800 dark:text-gray-300 text-lg">{translations.skills[language].animation}</p>
                 </div>
                 <div className="flex items-center justify-center space-x-3">
                   <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                  <p className="text-gray-600 dark:text-gray-300 text-lg">{translations.skills[language].concepts}</p>
+                  <p className="text-gray-800 dark:text-gray-300 text-lg">{translations.skills[language].concepts}</p>
                 </div>
                 <div className="flex items-center justify-center space-x-3">
                   <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-                  <p className="text-gray-600 dark:text-gray-300 text-lg">{translations.skills[language].rendering}</p>
+                  <p className="text-gray-800 dark:text-gray-300 text-lg">{translations.skills[language].rendering}</p>
                 </div>
               </div>
             </div>
