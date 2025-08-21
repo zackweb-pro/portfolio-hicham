@@ -99,6 +99,105 @@ function WorkPagePreview() {
   );
 }
 
+// Mock components for the contact page preview
+function ContactPagePreview() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 dark:from-black dark:via-gray-950 dark:to-slate-950 transition-colors duration-300 relative overflow-hidden flex">
+      {/* Bubbles Background - Like lights behind */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-br from-white/8 to-gray-300/6 dark:from-blue-400/12 dark:to-purple-400/8 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-20 w-[250px] h-[250px] bg-gradient-to-br from-gray-200/6 to-white/8 dark:from-cyan-400/10 dark:to-blue-400/12 rounded-full blur-2xl"></div>
+        <div className="absolute top-20 left-20 w-[280px] h-[280px] bg-gradient-to-br from-gray-200/5 to-white/7 dark:from-indigo-400/8 dark:to-blue-400/10 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/2 right-1/3 w-[200px] h-[200px] bg-gradient-to-br from-white/10 to-gray-100/8 dark:from-purple-400/12 dark:to-pink-400/8 rounded-full blur-xl"></div>
+        <div className="absolute bottom-20 left-1/4 w-[220px] h-[220px] bg-gradient-to-br from-gray-300/6 to-white/5 dark:from-blue-400/10 dark:to-cyan-400/8 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-40 right-20 w-[160px] h-[160px] bg-gradient-to-br from-white/12 to-gray-200/8 dark:from-teal-400/10 dark:to-blue-400/12 rounded-full blur-xl"></div>
+        <div className="absolute top-1/3 left-1/2 w-[120px] h-[120px] bg-gradient-to-br from-gray-100/8 to-white/10 dark:from-violet-400/8 dark:to-indigo-400/10 rounded-full blur-lg"></div>
+      </div>
+      {/* Light Glassy Foreground Overlay - Very subtle */}
+      <div className="absolute inset-0 z-5 bg-white/2 dark:bg-black/3 backdrop-blur-[0.2px]"></div>
+      <div className="flex-1 flex flex-col items-center justify-center relative z-10 px-4 py-10">
+        <div className="w-full max-w-lg bg-white/80 dark:bg-gray-900/80 rounded-2xl shadow-xl p-8 relative z-10">
+          {/* Title skeleton */}
+          <h1 className="relative text-4xl md:text-5xl lg:text-6xl font-black text-center mb-5 mt-2">
+            <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent blur-md opacity-50"></span>
+            <span className="relative bg-blue-500 dark:bg-white bg-clip-text text-transparent font-black" style={{
+              textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(147, 51, 234, 0.2)'
+            }}>
+              CONTACT
+            </span>
+          </h1>
+          {/* Subtitle skeleton */}
+          <div className="text-center mb-6">
+            <div className="h-4 bg-gray-300/60 dark:bg-gray-600/60 rounded mb-2 mx-auto w-4/5 animate-pulse">
+              <div className="h-full bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+            </div>
+            <div className="h-4 bg-gray-300/60 dark:bg-gray-600/60 rounded mx-auto w-3/5 animate-pulse">
+              <div className="h-full bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+            </div>
+          </div>
+
+          {/* Form skeleton */}
+          <div className="space-y-8">
+            {/* Name field skeleton */}
+            <div className="relative group">
+              <div className="w-full pl-10 pr-4 py-3 border-b-2 border-gray-300 dark:border-gray-600">
+                <div className="h-5 bg-gray-200/60 dark:bg-gray-700/60 rounded w-16 animate-pulse">
+                  <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                </div>
+              </div>
+              {/* Icon skeleton */}
+              <div className="absolute left-0 top-3 w-5 h-5 bg-gray-400/60 dark:bg-gray-500/60 rounded animate-pulse"></div>
+              {/* Animated underline skeleton */}
+              <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400/60 to-cyan-400/60 w-1/3 animate-pulse"></div>
+            </div>
+
+            {/* Email field skeleton */}
+            <div className="relative group">
+              <div className="w-full pl-10 pr-4 py-3 border-b-2 border-gray-300 dark:border-gray-600">
+                <div className="h-5 bg-gray-200/60 dark:bg-gray-700/60 rounded w-20 animate-pulse">
+                  <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                </div>
+              </div>
+              {/* Icon skeleton */}
+              <div className="absolute left-0 top-3 w-5 h-5 bg-gray-400/60 dark:bg-gray-500/60 rounded animate-pulse"></div>
+              {/* Animated underline skeleton */}
+              <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400/60 to-cyan-400/60 w-2/5 animate-pulse"></div>
+            </div>
+
+            {/* Message field skeleton */}
+            <div className="relative group">
+              <div className="w-full pl-10 pr-4 py-3 border-b-2 border-gray-300 dark:border-gray-600 min-h-[120px]">
+                <div className="space-y-2">
+                  <div className="h-4 bg-gray-200/60 dark:bg-gray-700/60 rounded w-full animate-pulse">
+                    <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                  </div>
+                  <div className="h-4 bg-gray-200/60 dark:bg-gray-700/60 rounded w-5/6 animate-pulse">
+                    <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                  </div>
+                  <div className="h-4 bg-gray-200/60 dark:bg-gray-700/60 rounded w-3/4 animate-pulse">
+                    <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                  </div>
+                </div>
+              </div>
+              {/* Icon skeleton */}
+              <div className="absolute left-0 top-3 w-5 h-5 bg-gray-400/60 dark:bg-gray-500/60 rounded animate-pulse"></div>
+              {/* Animated underline skeleton */}
+              <div className="absolute bottom-[6px] left-0 h-0.5 bg-gradient-to-r from-blue-400/60 to-cyan-400/60 w-3/5 animate-pulse"></div>
+            </div>
+
+            {/* Submit button skeleton */}
+            <div className="w-full py-3 mt-8 rounded-lg bg-gradient-to-r from-blue-600/60 to-cyan-600/60 flex items-center justify-center animate-pulse">
+              <div className="h-6 bg-white/20 rounded w-32">
+                <div className="h-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 interface SidebarPreviewProps {
   isVisible: boolean;
 }
@@ -175,10 +274,12 @@ function SidebarPreview({ isVisible }: SidebarPreviewProps) {
 
 export default function HomePage() {
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [previewPage, setPreviewPage] = useState<'work' | 'contact' | null>(null);
 
   const handleWorkClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsTransitioning(true);
+    setPreviewPage('work');
     
     // Navigate after animation completes
     setTimeout(() => {
@@ -189,6 +290,7 @@ export default function HomePage() {
   const handleContactClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsTransitioning(true);
+    setPreviewPage('contact');
     
     // Navigate after animation completes
     setTimeout(() => {
@@ -197,12 +299,12 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden"
-
-    >
-      {/* Work Page Preview (Behind) */}
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Page Preview (Behind) */}
       <div className="absolute inset-0">
-        <WorkPagePreview />
+        {previewPage === 'work' && <WorkPagePreview />}
+        {previewPage === 'contact' && <ContactPagePreview />}
+        {!previewPage && <WorkPagePreview />} {/* Default preview */}
       </div>
 
       {/* Sidebar (Slides in from right) */}
