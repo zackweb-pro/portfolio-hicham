@@ -3,7 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Home, Briefcase, Mail, Users, Sun, Moon, Globe } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
+import { useTheme, ThemeProvider } from "@/components/ThemeProvider";
 
 // Mock components for the work page preview
 function WorkPagePreview() {
@@ -275,6 +277,101 @@ function SidebarPreview({ isVisible }: SidebarPreviewProps) {
 export default function HomePage() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [previewPage, setPreviewPage] = useState<'work' | 'contact' | null>(null);
+  const { language } = useLanguage();
+
+  // Top controls component for language and theme switching
+  const TopControls = () => {
+    const { language, setLanguage } = useLanguage();
+    const { theme, toggleTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+      setMounted(true);
+    }, []);
+
+    if (!mounted) {
+      return null;
+    }
+
+    const handleLanguageToggle = () => {
+      setLanguage(language === 'en' ? 'fr' : 'en');
+    };
+
+    return (
+      <div className="fixed top-6 right-6 z-30 flex items-center gap-3">
+        {/* Language Switcher */}
+        <button
+          onClick={handleLanguageToggle}
+          className="flex items-center gap-2 px-4 py-2 bg-white/10 dark:bg-black/10 backdrop-blur-lg border border-white/20 dark:border-gray-700/50 rounded-full text-white hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 hover:scale-105 shadow-lg"
+        >
+          <Globe size={18} />
+          <span className="text-sm font-medium uppercase">{language}</span>
+        </button>
+
+        {/* Theme Toggle */}
+        <button
+          onClick={toggleTheme}
+          className="flex items-center justify-center w-10 h-10 bg-white/10 dark:bg-black/10 backdrop-blur-lg border border-white/20 dark:border-gray-700/50 rounded-full text-white hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 hover:scale-105 shadow-lg"
+        >
+          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+        </button>
+      </div>
+    );
+  };
+
+  // Translation objects
+  const translations = {
+    title: {
+      en: "Motion Graphics Designer",
+      fr: "Concepteur Graphique Animé"
+    },
+    subtitle: {
+      en: "10+ Years of Industry Excellence",
+      fr: "10+ Années d'Excellence Industrielle"
+    },
+    skills: {
+      en: {
+        animation: "2D & 3D Animation Specialist",
+        concepts: "Original Motion Graphics Concepts", 
+        rendering: "Color Rendering & Correction"
+      },
+      fr: {
+        animation: "Spécialiste Animation 2D et 3D",
+        concepts: "Concepts Graphiques Animés Originaux",
+        rendering: "Rendu et Correction des Couleurs"
+      }
+    },
+    skillTags: {
+      en: {
+        timeExpert: "Time Expert",
+        clientPro: "Client Pro",
+        master3d: "3D Master",
+        strategist: "Strategist"
+      },
+      fr: {
+        timeExpert: "Expert Temps",
+        clientPro: "Pro Client",
+        master3d: "Maître 3D", 
+        strategist: "Stratège"
+      }
+    },
+    buttons: {
+      en: {
+        work: "My Work",
+        contact: "Contact Me",
+        explore: "Click to Explore"
+      },
+      fr: {
+        work: "Mon Travail",
+        contact: "Me Contacter",
+        explore: "Cliquez pour Explorer"
+      }
+    },
+    quote: {
+      en: "Detail-oriented • Creative • Team Player",
+      fr: "Soucieux du détail • Créatif • Esprit d'équipe"
+    }
+  };
 
   const handleWorkClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -299,13 +396,87 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Page Preview (Behind) */}
-      <div className="absolute inset-0">
-        {previewPage === 'work' && <WorkPagePreview />}
-        {previewPage === 'contact' && <ContactPagePreview />}
-        {!previewPage && <WorkPagePreview />} {/* Default preview */}
+    <ThemeProvider>
+      <HomePageContent 
+        isTransitioning={isTransitioning}
+        previewPage={previewPage}
+        language={language}
+        translations={translations}
+        handleWorkClick={handleWorkClick}
+        handleContactClick={handleContactClick}
+      />
+    </ThemeProvider>
+  );
+}
+
+function HomePageContent({ 
+  isTransitioning, 
+  previewPage, 
+  language, 
+  translations, 
+  handleWorkClick, 
+  handleContactClick 
+}: {
+  isTransitioning: boolean;
+  previewPage: 'work' | 'contact' | null;
+  language: 'en' | 'fr';
+  translations: any;
+  handleWorkClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleContactClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}) {
+  const { theme } = useTheme();
+
+  // Top controls component for language and theme switching
+  const TopControls = () => {
+    const { language, setLanguage } = useLanguage();
+    const { theme, toggleTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+      setMounted(true);
+    }, []);
+
+    if (!mounted) {
+      return null;
+    }
+
+    const handleLanguageToggle = () => {
+      setLanguage(language === 'en' ? 'fr' : 'en');
+    };
+
+    return (
+      <div className="fixed top-6 right-6 z-30 flex items-center gap-3">
+        {/* Language Switcher */}
+        <button
+          onClick={handleLanguageToggle}
+          className="flex items-center gap-2 px-4 py-2 bg-white/10 dark:bg-black/10 backdrop-blur-lg border border-white/20 dark:border-gray-700/50 rounded-full text-white hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 hover:scale-105 shadow-lg"
+        >
+          <Globe size={18} />
+          <span className="text-sm font-medium uppercase">{language}</span>
+        </button>
+
+        {/* Theme Toggle */}
+        <button
+          onClick={toggleTheme}
+          className="flex items-center justify-center w-10 h-10 bg-white/10 dark:bg-black/10 backdrop-blur-lg border border-white/20 dark:border-gray-700/50 rounded-full text-white hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 hover:scale-105 shadow-lg"
+        >
+          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+        </button>
       </div>
+    );
+  };
+
+  return (
+    <div className="relative min-h-screen overflow-hidden">
+        {/* Top Controls - Language and Theme Switchers */}
+        <TopControls />
+        
+        {/* Page Preview (Behind) */}
+        <div className="absolute inset-0">
+          {previewPage === 'work' && <WorkPagePreview />}
+          {previewPage === 'contact' && <ContactPagePreview />}
+          {!previewPage && <WorkPagePreview />} {/* Default preview */}
+        </div>
 
       {/* Sidebar (Slides in from right) */}
       <SidebarPreview isVisible={isTransitioning}
@@ -316,18 +487,11 @@ export default function HomePage() {
       <div 
         className={`absolute inset-0 min-h-screen transition-transform duration-[1.5s] ease-in-out z-20 ${
           isTransitioning ? 'translate-x-full' : 'translate-x-0'
+        } ${theme === 'dark' 
+          ? 'bg-gradient-to-br from-gray-900 via-black to-gray-900' 
+          : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
         }`}
-        // style={{ backgroundColor: '#02050F' }}
-                    style={{ 
-                      transition: "800ms all ease-in-out",
-                     backgroundColor: "#02050F",
-  backgroundImage:`
-    radial-gradient(circle at 10% 20%, rgba(50, 50, 50, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 70% 80%, rgba(40, 40, 40, 0.4) 0%, transparent 60%),
-    radial-gradient(circle at 30% 60%, rgba(60, 60, 60, 0.2) 0%, transparent 40%)"`,
-  backgroundSize: "cover", /* Ensures the background covers the entire element */
-  backgroundAttachment: "fixed", /* Keeps the background fixed when scrolling */
-        }}
+  
       >
         {/* Background Text Effect Behind Image */}
         <div className="absolute inset-0 overflow-hidden opacity-10">
@@ -342,35 +506,53 @@ export default function HomePage() {
         {/* Professional Background Text - Top and Right */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
           {/* Top area floating text */}
-          <div className="absolute top-20 right-10 text-8xl font-black text-gray-800 transform rotate-12">
+          <div className={`absolute top-20 right-10 text-8xl font-black transform rotate-12 ${
+            theme === 'dark' ? 'text-gray-800' : 'text-gray-300'
+          }`}>
             MOTION
           </div>
-          <div className="absolute top-32 right-40 text-6xl font-bold text-gray-700 transform -rotate-6">
+          <div className={`absolute top-32 right-40 text-6xl font-bold transform -rotate-6 ${
+            theme === 'dark' ? 'text-gray-700' : 'text-gray-400'
+          }`}>
             GRAPHICS
           </div>
-          <div className="absolute top-60 right-20 text-4xl font-semibold text-gray-800 transform rotate-3">
+          <div className={`absolute top-60 right-20 text-4xl font-semibold transform rotate-3 ${
+            theme === 'dark' ? 'text-gray-800' : 'text-gray-300'
+          }`}>
             DESIGNER
           </div>
           
           {/* Right side floating text */}
-          <div className="absolute top-1/3 right-5 text-7xl font-black text-gray-800 transform rotate-45">
+          <div className={`absolute top-1/3 right-5 text-7xl font-black transform rotate-45 ${
+            theme === 'dark' ? 'text-gray-800' : 'text-gray-300'
+          }`}>
             3D
           </div>
-          <div className="absolute top-2/3 right-32 text-5xl font-bold text-gray-700 transform -rotate-12">
+          <div className={`absolute top-2/3 right-32 text-5xl font-bold transform -rotate-12 ${
+            theme === 'dark' ? 'text-gray-700' : 'text-gray-400'
+          }`}>
             ANIMATION
           </div>
-          <div className="absolute bottom-40 right-8 text-9xl font-black text-gray-800 transform rotate-6">
+          <div className={`absolute bottom-40 right-8 text-9xl font-black transform rotate-6 ${
+            theme === 'dark' ? 'text-gray-800' : 'text-gray-300'
+          }`}>
             CREATIVE
           </div>
           
           {/* Additional scattered text for depth */}
-          <div className="absolute top-96 right-64 text-3xl font-medium text-gray-700 transform rotate-45">
+          <div className={`absolute top-96 right-64 text-3xl font-medium transform rotate-45 ${
+            theme === 'dark' ? 'text-gray-700' : 'text-gray-400'
+          }`}>
             RENDER
           </div>
-          <div className="absolute top-80 right-12 text-2xl font-light text-gray-700 transform -rotate-30">
+          <div className={`absolute top-80 right-12 text-2xl font-light transform -rotate-30 ${
+            theme === 'dark' ? 'text-gray-700' : 'text-gray-400'
+          }`}>
             VISUAL
           </div>
-          <div className="absolute bottom-60 right-48 text-6xl font-bold text-gray-700 transform rotate-15">
+          <div className={`absolute bottom-60 right-48 text-6xl font-bold transform rotate-15 ${
+            theme === 'dark' ? 'text-gray-700' : 'text-gray-400'
+          }`}>
             EFFECTS
           </div>
         </div>
@@ -386,28 +568,28 @@ export default function HomePage() {
                 <div className="px-5 py-3 bg-gradient-to-r from-blue-500/30 to-blue-400/30 border border-blue-400/40 rounded-full backdrop-blur-lg hover:scale-110 transition-all duration-300 group shadow-lg hover:shadow-blue-400/25">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                    <span className="text-blue-300 text-sm font-semibold">Time Expert</span>
+                    <span className="text-blue-300 text-sm font-semibold">{translations.skillTags[language].timeExpert}</span>
                   </div>
                 </div>
                 
                 <div className="px-5 py-3 bg-gradient-to-r from-purple-500/30 to-purple-400/30 border border-purple-400/40 rounded-full backdrop-blur-lg hover:scale-110 transition-all duration-300 group shadow-lg hover:shadow-purple-400/25">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
-                    <span className="text-purple-300 text-sm font-semibold">Client Pro</span>
+                    <span className="text-purple-300 text-sm font-semibold">{translations.skillTags[language].clientPro}</span>
                   </div>
                 </div>
                 
                 <div className="px-5 py-3 bg-gradient-to-r from-cyan-500/30 to-cyan-400/30 border border-cyan-400/40 rounded-full backdrop-blur-lg hover:scale-110 transition-all duration-300 group shadow-lg hover:shadow-cyan-400/25">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
-                    <span className="text-cyan-300 text-sm font-semibold">3D Master</span>
+                    <span className="text-cyan-300 text-sm font-semibold">{translations.skillTags[language].master3d}</span>
                   </div>
                 </div>
                 
                 <div className="px-5 py-3 bg-gradient-to-r from-indigo-500/30 to-indigo-400/30 border border-indigo-400/40 rounded-full backdrop-blur-lg hover:scale-110 transition-all duration-300 group shadow-lg hover:shadow-indigo-400/25">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" style={{ animationDelay: '0.9s' }}></div>
-                    <span className="text-indigo-300 text-sm font-semibold">Strategist</span>
+                    <span className="text-indigo-300 text-sm font-semibold">{translations.skillTags[language].strategist}</span>
                   </div>
                 </div>
               </div>
@@ -417,7 +599,7 @@ export default function HomePage() {
               {/* Text above arrow */}
               <div className="text-center mb-2">
                 <p className="text-blue-300 text-lg font-semibold animate-pulse">
-                  Click to Explore
+                  {translations.buttons[language].explore}
                 </p>
                 <div className="flex justify-center mt-1">
                   <div className="w-2 h-2 bg-blue-400 rounded-full mr-1 animate-bounce"></div>
@@ -440,7 +622,7 @@ export default function HomePage() {
                 className="group relative px-10 py-4 bg-gradient-to-r from-blue-600 via-blue-600 to-cyan-600 hover:from-blue-700 hover:via-blue-700 hover:to-cyan-700 text-white rounded-full text-xl font-bold flex items-center gap-3 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25 hover:scale-105"
                 disabled={isTransitioning}
               >
-                <span className="relative z-10"> My Work</span>
+                <span className="relative z-10">{translations.buttons[language].work}</span>
                 <ArrowRight size={24} className="ml-1 animate-bounce-right group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
               </button>
@@ -450,13 +632,13 @@ export default function HomePage() {
                 className="group relative px-10 py-4 bg-gradient-to-r from-green-600 via-green-600 to-emerald-600 hover:from-green-700 hover:via-green-700 hover:to-emerald-700 text-white rounded-full text-xl font-bold flex items-center gap-3 transition-all duration-300 shadow-2xl hover:shadow-green-500/25 hover:scale-105"
                 disabled={isTransitioning}
               >
-                <span className="relative z-10">Contact Me</span>
+                <span className="relative z-10">{translations.buttons[language].contact}</span>
                 <ArrowRight size={24} className="ml-1 animate-bounce-right group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
               </button>
               
-              <p className="text-gray-400 text-sm italic mt-2">
-                &ldquo;Detail-oriented • Creative • Team Player&rdquo;
+              <p className="text-gray-500 dark:text-gray-400 text-sm italic mt-2">
+                &ldquo;{translations.quote[language]}&rdquo;
               </p>
             </div>
           </div>
@@ -480,11 +662,11 @@ export default function HomePage() {
 
               {/* Professional Title */}
               <div className="mb-8">
-                <p className="text-2xl md:text-3xl font-bold text-blue-300 mb-2">
-                  Motion Graphics Designer
+                <p className="text-2xl md:text-3xl font-bold text-blue-300 dark:text-blue-300 mb-2">
+                  {translations.title[language]}
                 </p>
-                <p className="text-lg text-gray-300 font-medium">
-                  10+ Years of Industry Excellence
+                <p className="text-lg text-gray-600 dark:text-gray-300 font-medium">
+                  {translations.subtitle[language]}
                 </p>
               </div>
 
@@ -492,15 +674,15 @@ export default function HomePage() {
               <div className="mb-8 space-y-3">
                 <div className="flex items-center justify-center space-x-3">
                   <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                  <p className="text-gray-300 text-lg">2D & 3D Animation Specialist</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-lg">{translations.skills[language].animation}</p>
                 </div>
                 <div className="flex items-center justify-center space-x-3">
                   <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                  <p className="text-gray-300 text-lg">Original Motion Graphics Concepts</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-lg">{translations.skills[language].concepts}</p>
                 </div>
                 <div className="flex items-center justify-center space-x-3">
                   <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-                  <p className="text-gray-300 text-lg">Color Rendering & Correction</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-lg">{translations.skills[language].rendering}</p>
                 </div>
               </div>
             </div>
