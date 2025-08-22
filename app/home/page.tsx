@@ -611,7 +611,7 @@ function HomePageContent({
 
             <div className="flex flex-col items-center space-y-4">
               {/* Text above arrow */}
-              <div className="text-center mb-2">
+              <div className="text-center">
                 <p className="text-blue-600 dark:text-blue-300 text-lg font-semibold animate-pulse">
                   {translations.buttons[language].explore}
                 </p>
@@ -620,17 +620,18 @@ function HomePageContent({
                   <div className="w-2 h-2 bg-purple-400 rounded-full mr-1 animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                   <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
                 </div>
+
               </div>
 
-              <Image
-                src="/assets/arrow.png"
-                alt="Arrow"
-                width={100}
-                height={100}
-                className="arrow-point"
-                priority
-              />
-              
+              {/* Animated Arrow - Positioned between text and buttons */}
+              <div className="relative z-10 h-[100px] ">
+                <div className="container-arrow">
+                  <div className="arrrow"></div>
+                  <div className="arrrow"></div>
+                  <div className="arrrow"></div>
+                </div>
+              </div>
+
               <button
                 onClick={handleWorkClick}
                 className="group relative px-10 py-4 bg-gradient-to-r from-blue-600 via-blue-600 to-cyan-600 hover:from-blue-700 hover:via-blue-700 hover:to-cyan-700 text-white rounded-full text-xl font-bold flex items-center gap-3 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25 hover:scale-105"

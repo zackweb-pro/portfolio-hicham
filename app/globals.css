@@ -253,3 +253,59 @@ html, body{
 .animate-shimmer {
   animation: shimmer 2s infinite linear;
 }
+
+.container-arrow {
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 width: 10px;
+   /* height: 150px; */
+}
+ .arrrow {
+	 position: absolute;
+	 width: 2.1rem;
+	 height: 0.48rem;
+	 opacity: 0;
+	 transform: scale(0.3);
+	 animation: move-arrow 3s ease-out infinite;
+}
+ .arrrow:first-child {
+	 animation: move-arrow 3s ease-out 1s infinite;
+}
+ .arrrow:nth-child(2) {
+	 animation: move-arrow 3s ease-out 2s infinite;
+}
+ .arrrow:before, .arrrow:after {
+	 content: '';
+	 position: absolute;
+	 top: 0;
+	 height: 100%;
+	 width: 50%;
+	 background: linear-gradient(135deg, #06b6d4, #0891b2);
+}
+ .arrrow:before {
+	 left: 0;
+	 transform: skewY(30deg);
+}
+ .arrrow:after {
+	 right: 0;
+	 width: 50%;
+	 transform: skewY(-30deg);
+}
+ @keyframes move-arrow {
+	 25% {
+		 opacity: 1;
+	}
+	 33.3% {
+		 opacity: 1;
+		 transform: translateY(2.28rem);
+	}
+	 66.6% {
+		 opacity: 1;
+		 transform: translateY(3.12rem);
+	}
+	 100% {
+		 opacity: 0;
+		 transform: translateY(4.8rem) scale(0.5);
+	}
+}
