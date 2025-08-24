@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Plyr CSS for video player */
+@import 'plyr/dist/plyr.css';
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -308,4 +311,14 @@ html, body{
 		 opacity: 0;
 		 transform: translateY(4.8rem) scale(0.5);
 	}
+}
+
+/* Portfolio Grid Slide In Animation */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

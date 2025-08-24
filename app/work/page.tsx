@@ -19,7 +19,7 @@ function PageContent() {
     }
   };
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 dark:from-black dark:via-gray-950 dark:to-slate-950 transition-colors duration-300 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 dark:from-black dark:via-gray-950 dark:to-slate-950 transition-colors duration-300 relative overflow-hidden ">
       {/* Bubbles Background - Like lights behind */}
       <div className="absolute inset-0 z-0">
         {/* Large bubble - top right corner */}
@@ -39,21 +39,29 @@ function PageContent() {
       {/* Light Glassy Foreground Overlay - Very subtle */}
       <div className="absolute inset-0 z-5 bg-white/2 dark:bg-black/3 backdrop-blur-[0.2px]"></div>
       <div className="flex relative z-10">
+        {/* Left Side - Title with Cyan Quarter Circle */}
+        <div className="w-80 absolute flex items-start justify-start pt-5 pl-8">
+          {/* Cyan Blurry Quarter Circle Background */}
+          <div className="absolute top-[-40px] left-[-40px] w-60 h-60 bg-gradient-to-br from-cyan-400/90 to-cyan-600/900 dark:from-cyan-400/900 dark:to-cyan-600/90 rounded-br-full blur-xl"></div>
+          
+          {/* Title */}
+          <div className="relative z-10">
+            <h1 className="relative text-4xl md:text-5xl lg:text-6xl font-black mb-5 mt-2">
+              {/* Glow background layer */}
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent blur-md opacity-50"></span>
+              {/* Main readable text */}
+              <span className="relative bg-blue-500 dark:bg-white bg-clip-text text-transparent font-black" style={{
+                textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(147, 51, 234, 0.2)'
+              }}>
+                {translations.title[language].toUpperCase()}
+              </span>
+            </h1>
+          </div>
+        </div>
+
         {/* Main Content */}
-        <div className="flex-1 pr-20 relative z-20">
+        <div className="flex-1 pr-20 relative z-20 pt-[60px]">
           <div className="px-4 py-2">
-            <div className="mb-4">
-              <h1 className="relative text-4xl md:text-5xl lg:text-6xl font-black text-center mb-5 mt-2">
-                {/* Glow background layer */}
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent blur-md opacity-50"></span>
-                {/* Main readable text */}
-                <span className="relative bg-blue-500 dark:bg-white bg-clip-text text-transparent font-black" style={{
-                  textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(147, 51, 234, 0.2)'
-                }}>
-                  {translations.title[language].toUpperCase()}
-                </span>
-              </h1>
-            </div>
             <PortfolioGrid />
           </div>
         </div>

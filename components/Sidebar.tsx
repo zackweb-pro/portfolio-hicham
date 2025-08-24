@@ -71,7 +71,7 @@ export default function Sidebar() {
                 </a>
               </Link>
               {/* Tooltip */}
-              <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-900/90 dark:bg-white/80 text-white dark:text-black px-2 py-1 rounded text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap backdrop-blur-sm">
+              <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-cyan-900 dark:bg-cyan-500 text-white dark:text-white px-2 py-1 rounded text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap backdrop-blur-sm">
                 {item.label}
               </div>
             </div>

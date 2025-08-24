@@ -2,10 +2,17 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { X, ArrowLeft, Expand } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import { PortfolioItem } from './PortfolioGrid';
 import { useLanguage } from './LanguageProvider';
 import { useModal } from './ModalProvider';
 import Gallery from './Gallery';
+
+// Dynamically import Plyr with SSR disabled
+const Plyr = dynamic(() => import('plyr-react'), {
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-gray-900 flex items-center justify-center text-white">Loading player...</div>
+});
 
 interface VideoModalProps {
   item: PortfolioItem;
@@ -17,7 +24,7 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
   const { setIsModalExpanded } = useModal();
   const [showDetails, setShowDetails] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const plyrRef = useRef<any>(null);
 
   // Debug: Log the item data
   console.log('VideoModal item:', item);
@@ -136,8 +143,8 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
 
   const handleShowDetails = () => {
     // Pause video when showing details (only for videos)
-    if (mediaType === 'video' && videoRef.current) {
-      videoRef.current.pause();
+    if (mediaType === 'video' && plyrRef.current?.plyr) {
+      plyrRef.current.plyr.pause();
     }
     setShowDetails(true);
   };
@@ -208,22 +215,128 @@ export default function VideoModal({ item, onClose }: VideoModalProps) {
             {/* Media Display */}
             <div className="relative bg-black aspect-video">
               {mediaType === 'video' ? (
-                // Video Player
-                <video
-                  ref={videoRef}
-                  className="w-full h-full object-cover"
-                  controls
-                  autoPlay
-                  poster={item.thumbnail}
-                  onError={(e) => {
-                    console.error('Video failed to load:', item.src);
-                    console.error('Video error event:', e);
+                // Plyr Video Player
+                <Plyr
+                  ref={plyrRef}
+                  source={{
+                    type: 'video',
+                    sources: [
+                      {
+                        src: item.src || '',
+                        type: 'video/mp4',
+                      },
+                    ],
+                    poster: item.thumbnail,
                   }}
-                >
-                  <source src={item.src} type="video/mp4" />
-                  <source src={item.src} type="video/webm" />
-                  Your browser does not support the video tag.
-                </video>
+                  options={{
+                    // Control buttons to display
+                    controls: [
+                      'play-large', // The large play button in the center
+                      'restart', // Restart playback
+                      'rewind', // Rewind by the seek time (default 10 seconds)
+                      'play', // Play/pause playback
+                      'fast-forward', // Fast forward by the seek time (default 10 seconds)
+                      'progress', // The progress bar and scrubber for playback and buffering
+                      'current-time', // The current time of playback
+                      'duration', // The full duration of the media
+                      'mute', // Toggle mute
+                      'volume', // Volume control
+                      'captions', // Toggle captions
+                      'settings', // Settings menu
+                      'pip', // Picture-in-picture (currently Safari only)
+                      'airplay', // Airplay (currently Safari only)
+                      'download', // Show a download button with a link to either the current source or a custom URL
+                      'fullscreen', // Toggle fullscreen
+                    ],
+                    
+                    // Playback settings
+                    autoplay: true,
+                    autopause: true, // Only allow one player playing at once
+                    seekTime: 10, // The time, in seconds, to seek when a user hits fast forward or rewind
+                    volume: 1, // A number, between 0 and 1, representing the initial volume of the player
+                    muted: false, // Whether to start playback muted
+                    
+                    // Display settings  
+                    clickToPlay: true, // Click (or tap) of the video container will toggle play/pause
+                    disableContextMenu: true, // Disable right click menu on video to help prevent downloads
+                    hideControls: true, // Hide video controls automatically after 2s of no mouse or focus movement
+                    resetOnEnd: false, // Reset the playback to the start once playback is complete
+                    
+                    // Keyboard shortcuts
+                    keyboard: { 
+                      focused: true, // Only trigger keyboard shortcuts when the player has focus
+                      global: false // Trigger keyboard shortcuts even when the player doesn't have focus
+                    },
+                    
+                    // Tooltips
+                    tooltips: { 
+                      controls: true, // Display control labels as tooltips on :hover & :focus
+                      seek: true // Display seek tooltip to indicate on click where the media would seek to
+                    },
+                    
+                    // Captions settings
+                    captions: { 
+                      active: false, // Toggles if captions are active by default
+                      language: 'auto', // Sets the default language to load (if available)
+                      update: false // Listen to new tracks added after Plyr is initialized
+                    },
+                    
+                    // Fullscreen settings
+                    fullscreen: { 
+                      enabled: true, // Toggles whether fullscreen is enabled
+                      fallback: true, // Allow fallback to a full-window/viewport for older browsers
+                      iosNative: false // Use the native fullscreen in iOS (disables custom controls)
+                    },
+                    
+                    // Speed/Quality settings
+                    speed: { 
+                      selected: 1, // The default speed for playback
+                      options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2] // Available playback speeds
+                    },
+                    
+                    quality: {
+                      default: 720, // Default quality level
+                      options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240],
+                      forced: false, // Force a quality level (no quality selection)
+                    },
+                    
+                    // Loop settings
+                    loop: { 
+                      active: false // Whether to loop the current video
+                    },
+                    
+                    // Loading and buffering
+                    loadSprite: true, // Load the SVG sprite specified in the iconUrl option
+                    iconPrefix: 'plyr', // Specify the id prefix for the icons used in the default controls
+                    iconUrl: 'https://cdn.plyr.io/3.7.8/plyr.svg', // Specify a URL or path to the SVG sprite
+                    
+                    // Ads (if needed in the future)
+                    ads: {
+                      enabled: false, // Enable advertisements
+                      publisherId: '', // Your Publisher ID from vi (https://vi.ai/publisher-video-monetization/?aid=plyrio)
+                      tagUrl: '' // Your ad tag URL
+                    },
+                    
+                    // Preview thumbnails (if available)
+                    previewThumbnails: {
+                      enabled: false, // Enable preview thumbnails
+                      src: '' // Thumbnail sprite image or WebVTT file
+                    },
+                    
+                    // Storage for user settings
+                    storage: { 
+                      enabled: true, // Allow use of local storage to store user settings
+                      key: 'plyr' // The key name to use for local storage
+                    },
+                    
+                    // Responsive settings
+                    invertTime: true, // Display the current time as a countdown rather than an incremental counter
+                    toggleInvert: true, // Allow users to click to toggle the above
+                    
+                    // Debug mode
+                    debug: false, // Enable debugging mode (logs events to console)
+                  }}
+                />
               ) : (
                 // Image/GIF Display
                 <div className="relative w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-800">

@@ -194,19 +194,30 @@ function PageContent() {
       <div className="absolute inset-0 z-5 bg-white/2 dark:bg-black/3 backdrop-blur-[0.2px]"></div>
       
       <div className="flex relative z-10">
+        {/* Left Side - Title with Cyan Quarter Circle */}
+        <div className="w-100 absolute flex items-start justify-start pl-8 pt-5 no-wrap">
+          {/* Cyan Blurry Quarter Circle Background */}
+          <div className="absolute top-[-40px] left-[-40px] w-60 h-60 bg-gradient-to-br from-cyan-400/90 to-cyan-600/900 dark:from-cyan-400/900 dark:to-cyan-600/90 rounded-br-full blur-xl"></div>
+          
+          {/* Title */}
+          <div className="relative top-0 z-10">
+            <h1 className="relative text-4xl md:text-5xl lg:text-6xl font-black mb-5 mt-2">
+              {/* Glow background layer */}
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent blur-md opacity-50"></span>
+              {/* Main readable text */}
+              <span className="relative bg-blue-500 dark:bg-white bg-clip-text text-transparent font-black" style={{
+                textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(147, 51, 234, 0.2)'
+              }}>
+                {translations.title[language]}
+              </span>
+            </h1>
+          </div>
+        </div>
+
         {/* Main Content - properly spaced from sidebar */}
-        <div className="flex-1 pr-24 relative z-20">
+        <div className="flex-1 pr-24 relative z-20 min-h-screen flex justify-center items-center">
           <div className="px-6 py-8">
             <div className="mb-12">
-              <h1 className="relative text-4xl md:text-5xl lg:text-6xl font-black text-center mb-6 mt-4">
-                {/* Glow background layer */}
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent blur-md opacity-50"></span>
-                {/* Main readable text */}
-                <span className="relative bg-blue-500 dark:bg-white bg-clip-text text-transparent font-black">
-                  {translations.title[language]}
-                </span>
-              </h1>
-              
               <p className="text-center text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
                 {translations.subtitle[language]}
               </p>

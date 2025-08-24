@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Home, Briefcase, Mail, Users, Sun, Moon, Globe } from "lucide-react";
+import { ArrowRight, Home, Briefcase, Mail, Users, Sun, Moon, Globe, User, MessageSquare, Linkedin, ExternalLink, Instagram, Facebook } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 import { useTheme, ThemeProvider } from "@/components/ThemeProvider";
@@ -28,23 +28,34 @@ function WorkPagePreview() {
       
       <div className="flex relative z-10">
         {/* Main Content */}
-        <div className="flex-1 pr-20 relative z-20">
+        <div className="flex-1 relative z-20">
           <div className="px-4 py-2">
-            <div className="mb-4">
-              <h1 className="relative text-4xl md:text-5xl lg:text-6xl font-black text-center mb-5 mt-2">
-                {/* Glow background layer */}
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent blur-md opacity-50"></span>
-                {/* Main readable text */}
-                <span className="relative bg-blue-500 dark:bg-white bg-clip-text text-transparent font-black" style={{
-                  textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(147, 51, 234, 0.2)'
-                }}>
-                  WORKS
-                </span>
-              </h1>
+      <div className="w-80 absolute flex items-start justify-start pt-5 pl-8">
+              {/* Cyan Blurry Quarter Circle Background */}
+              <div className="absolute top-[-40px] left-[-40px] w-60 h-60 bg-gradient-to-br from-cyan-400/90 to-cyan-600/900 dark:from-cyan-400/900 dark:to-cyan-600/90 rounded-br-full blur-xl"></div>
+              
+              {/* Title */}
+              <div className="relative z-10">
+                <h1 className="relative text-4xl md:text-5xl lg:text-6xl font-black mb-5 mt-2">
+                  <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent blur-md opacity-50"></span>
+                  <span className="relative bg-blue-500 dark:bg-white bg-clip-text text-transparent font-black" style={{
+                    textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(147, 51, 234, 0.2)'
+                  }}>
+                   WORKS
+                  </span>
+                </h1>
+              </div>
             </div>
             
-            {/* Portfolio Grid Placeholder - Matching PortfolioCard styling */}
-            <div className="w-[75vw] mx-auto m-[90px] relative">
+            {/* Portfolio Grid Container with synchronized slide animation */}
+            <div 
+              className="w-[75vw] mx-auto m-[90px] relative transition-transform duration-[1.5s] ease-in-out pt-[40px]"
+              style={{
+                transform: 'translateX(-75vw)',
+                animation: 'slideInFromLeft 1.5s ease-in-out 0s forwards',
+                transition: "all 1s ease-in-out",
+              }}
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => (
                   <div key={item} className="portfolio-card group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500">
@@ -104,6 +115,15 @@ function WorkPagePreview() {
 
 // Mock components for the contact page preview
 function ContactPagePreview() {
+  const { language } = useLanguage();
+  
+  const translations = {
+    title: {
+      en: "Contact",
+      fr: "Contact"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 dark:from-black dark:via-gray-950 dark:to-slate-950 transition-colors duration-300 relative overflow-hidden flex">
       {/* Bubbles Background - Like lights behind */}
@@ -118,81 +138,182 @@ function ContactPagePreview() {
       </div>
       {/* Light Glassy Foreground Overlay - Very subtle */}
       <div className="absolute inset-0 z-5 bg-white/2 dark:bg-black/3 backdrop-blur-[0.2px]"></div>
-      <div className="flex-1 flex flex-col items-center justify-center relative z-10 px-4 py-10">
-        <div className="w-full max-w-lg bg-white/80 dark:bg-gray-900/80 rounded-2xl shadow-xl p-8 relative z-10">
-          {/* Title skeleton */}
-          <h1 className="relative text-4xl md:text-5xl lg:text-6xl font-black text-center mb-5 mt-2">
-            <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent blur-md opacity-50"></span>
-            <span className="relative bg-blue-500 dark:bg-white bg-clip-text text-transparent font-black" style={{
-              textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(147, 51, 234, 0.2)'
-            }}>
-              CONTACT
-            </span>
-          </h1>
-          {/* Subtitle skeleton */}
-          <div className="text-center mb-6">
-            <div className="h-4 bg-gray-300/60 dark:bg-gray-600/60 rounded mb-2 mx-auto w-4/5 animate-pulse">
-              <div className="h-full bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+      
+      <div className="flex relative z-10 min-h-screen w-full">
+        {/* Left Side - Title with Cyan Quarter Circle */}
+        <div className="w-80 absolute flex items-start justify-start pt-5 pl-8">
+          {/* Cyan Blurry Quarter Circle Background */}
+          <div className="absolute top-[-40px] left-[-40px] w-60 h-60 bg-gradient-to-br from-cyan-400/90 to-cyan-600/900 dark:from-cyan-400/900 dark:to-cyan-600/90 rounded-br-full blur-xl"></div>
+          
+          {/* Title */}
+          <div className="relative z-10">
+            <h1 className="relative text-4xl md:text-5xl lg:text-6xl font-black mb-5 mt-2">
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent blur-md opacity-50"></span>
+              <span className="relative bg-blue-500 dark:bg-white bg-clip-text text-transparent font-black" style={{
+                textShadow: '0 0 40px rgba(59, 130, 246, 0.3), 0 0 80px rgba(147, 51, 234, 0.2)'
+              }}>
+                {translations.title[language].toUpperCase()}
+              </span>
+            </h1>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 relative z-20 flex flex-col">
+          {/* Contact Section - Form and Info Side by Side */}
+          <div className="flex-1 flex flex-col items-center justify-center px-4 pr-20">
+            {/* Subtitle skeleton - centered above both sections */}
+            <div className="text-center mb-8 max-w-2xl">
+              <div className="h-6 bg-gray-300/60 dark:bg-gray-600/60 rounded mb-2 mx-auto w-4/5 animate-pulse">
+                <div className="h-full bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+              </div>
+              <div className="h-6 bg-gray-300/60 dark:bg-gray-600/60 rounded mx-auto w-3/5 animate-pulse">
+                <div className="h-full bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+              </div>
             </div>
-            <div className="h-4 bg-gray-300/60 dark:bg-gray-600/60 rounded mx-auto w-3/5 animate-pulse">
-              <div className="h-full bg-gradient-to-r from-transparent via-white/30 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+            
+            <div className="flex gap-6 w-full max-w-5xl justify-center">
+              {/* Contact Form Skeleton */}
+              <div className="flex-1 max-w-lg bg-white/80 dark:bg-gray-900/80 rounded-2xl shadow-xl p-5 relative z-10 min-h-[500px] flex flex-col justify-center">
+                <div className="space-y-8 flex flex-col items-center justify-center">
+                  {/* Name field skeleton */}
+                  <div className="relative group w-full max-w-md">
+                    <div className="w-full pl-10 pr-4 py-3 border-b-2 border-gray-300 dark:border-gray-600">
+                      <div className="h-5 bg-gray-200/60 dark:bg-gray-700/60 rounded w-16 animate-pulse">
+                        <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                      </div>
+                    </div>
+                    {/* Icon skeleton */}
+                    <div className="absolute left-0 top-3 w-5 h-5 bg-gray-400/60 dark:bg-gray-500/60 rounded animate-pulse"></div>
+                    {/* Animated underline skeleton */}
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400/60 to-cyan-400/60 w-1/3 animate-pulse"></div>
+                  </div>
+
+                  {/* Email field skeleton */}
+                  <div className="relative group w-full max-w-md">
+                    <div className="w-full pl-10 pr-4 py-3 border-b-2 border-gray-300 dark:border-gray-600">
+                      <div className="h-5 bg-gray-200/60 dark:bg-gray-700/60 rounded w-20 animate-pulse">
+                        <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                      </div>
+                    </div>
+                    {/* Icon skeleton */}
+                    <div className="absolute left-0 top-3 w-5 h-5 bg-gray-400/60 dark:bg-gray-500/60 rounded animate-pulse"></div>
+                    {/* Animated underline skeleton */}
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400/60 to-cyan-400/60 w-2/5 animate-pulse"></div>
+                  </div>
+
+                  {/* Message field skeleton */}
+                  <div className="relative group w-full max-w-md">
+                    <div className="w-full pl-10 pr-4 py-3 border-b-2 border-gray-300 dark:border-gray-600 min-h-[120px]">
+                      <div className="space-y-2">
+                        <div className="h-4 bg-gray-200/60 dark:bg-gray-700/60 rounded w-full animate-pulse">
+                          <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                        </div>
+                        <div className="h-4 bg-gray-200/60 dark:bg-gray-700/60 rounded w-5/6 animate-pulse">
+                          <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                        </div>
+                        <div className="h-4 bg-gray-200/60 dark:bg-gray-700/60 rounded w-3/4 animate-pulse">
+                          <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Icon skeleton */}
+                    <div className="absolute left-0 top-3 w-5 h-5 bg-gray-400/60 dark:bg-gray-500/60 rounded animate-pulse"></div>
+                    {/* Animated underline skeleton */}
+                    <div className="absolute bottom-[6px] left-0 h-0.5 bg-gradient-to-r from-blue-400/60 to-cyan-400/60 w-3/5 animate-pulse"></div>
+                  </div>
+
+                  {/* Submit button skeleton */}
+                  <div className="w-full max-w-md py-3 mt-8 rounded-lg bg-gradient-to-r from-blue-600/60 to-cyan-600/60 flex items-center justify-center animate-pulse">
+                    <div className="h-6 bg-white/20 rounded w-32">
+                      <div className="h-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer rounded"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Contact Info Section Skeleton */}
+              <div className="flex-1 max-w-[300px] bg-white/80 dark:bg-gray-900/80 rounded-2xl shadow-xl p-5 relative z-10 min-h-[500px] flex flex-col justify-center">
+                {/* Avatar skeleton */}
+                <div className="flex justify-center mb-4">
+                  <div className="relative">
+                    <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500/60 to-cyan-500/60 p-1 animate-pulse">
+                      <div className="w-full h-full rounded-full bg-gray-300/60 dark:bg-gray-700/60">
+                        <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded-full"></div>
+                      </div>
+                    </div>
+                    {/* Status indicator skeleton */}
+                    <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500/60 rounded-full animate-pulse"></div>
+                  </div>
+                </div>
+
+                {/* Name and Title skeleton */}
+                <div className="text-center mb-4">
+                  <div className="h-5 bg-gray-300/60 dark:bg-gray-600/60 rounded mb-2 mx-auto w-32 animate-pulse">
+                    <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                  </div>
+                  <div className="h-4 bg-blue-600/60 dark:bg-blue-400/60 rounded mx-auto w-24 animate-pulse">
+                    <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                  </div>
+                </div>
+
+                {/* Contact Details skeleton */}
+                <div className="space-y-3">
+                  {/* Email skeleton */}
+                  <div className="flex items-center p-2 rounded-lg">
+                    <div className="w-8 h-8 bg-gradient-to-r from-blue-500/60 to-cyan-500/60 rounded-full flex items-center justify-center mr-3 animate-pulse"></div>
+                    <div className="flex-1">
+                      <div className="h-3 bg-gray-300/60 dark:bg-gray-600/60 rounded mb-1 w-12 animate-pulse">
+                        <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                      </div>
+                      <div className="h-3 bg-gray-300/60 dark:bg-gray-600/60 rounded w-24 animate-pulse">
+                        <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Social links skeletons */}
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="flex items-center p-2 rounded-lg">
+                      <div className="w-8 h-8 bg-gradient-to-r from-purple-500/60 to-pink-500/60 rounded-full flex items-center justify-center mr-3 animate-pulse"></div>
+                      <div className="flex-1">
+                        <div className="h-3 bg-gray-300/60 dark:bg-gray-600/60 rounded mb-1 w-16 animate-pulse">
+                          <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                        </div>
+                        <div className="h-3 bg-gray-300/60 dark:bg-gray-600/60 rounded w-20 animate-pulse">
+                          <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
+                        </div>
+                      </div>
+                      <div className="w-3 h-3 bg-gray-400/60 rounded animate-pulse"></div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* WhatsApp Deal Button skeleton */}
+                <div className="mt-4 p-3 bg-gradient-to-r from-green-500/60 to-emerald-500/60 rounded-lg animate-pulse">
+                  <div className="flex items-center justify-center">
+                    <div className="w-3 h-3 bg-white/60 rounded-full mr-3 animate-pulse"></div>
+                    <div className="text-center">
+                      <div className="h-4 bg-white/20 rounded mb-1 w-28 mx-auto">
+                        <div className="h-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer rounded"></div>
+                      </div>
+                      <div className="h-3 bg-green-100/60 rounded w-24 mx-auto">
+                        <div className="h-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Form skeleton */}
-          <div className="space-y-8">
-            {/* Name field skeleton */}
-            <div className="relative group">
-              <div className="w-full pl-10 pr-4 py-3 border-b-2 border-gray-300 dark:border-gray-600">
-                <div className="h-5 bg-gray-200/60 dark:bg-gray-700/60 rounded w-16 animate-pulse">
-                  <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
-                </div>
-              </div>
-              {/* Icon skeleton */}
-              <div className="absolute left-0 top-3 w-5 h-5 bg-gray-400/60 dark:bg-gray-500/60 rounded animate-pulse"></div>
-              {/* Animated underline skeleton */}
-              <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400/60 to-cyan-400/60 w-1/3 animate-pulse"></div>
-            </div>
-
-            {/* Email field skeleton */}
-            <div className="relative group">
-              <div className="w-full pl-10 pr-4 py-3 border-b-2 border-gray-300 dark:border-gray-600">
-                <div className="h-5 bg-gray-200/60 dark:bg-gray-700/60 rounded w-20 animate-pulse">
-                  <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
-                </div>
-              </div>
-              {/* Icon skeleton */}
-              <div className="absolute left-0 top-3 w-5 h-5 bg-gray-400/60 dark:bg-gray-500/60 rounded animate-pulse"></div>
-              {/* Animated underline skeleton */}
-              <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400/60 to-cyan-400/60 w-2/5 animate-pulse"></div>
-            </div>
-
-            {/* Message field skeleton */}
-            <div className="relative group">
-              <div className="w-full pl-10 pr-4 py-3 border-b-2 border-gray-300 dark:border-gray-600 min-h-[120px]">
-                <div className="space-y-2">
-                  <div className="h-4 bg-gray-200/60 dark:bg-gray-700/60 rounded w-full animate-pulse">
-                    <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
-                  </div>
-                  <div className="h-4 bg-gray-200/60 dark:bg-gray-700/60 rounded w-5/6 animate-pulse">
-                    <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
-                  </div>
-                  <div className="h-4 bg-gray-200/60 dark:bg-gray-700/60 rounded w-3/4 animate-pulse">
-                    <div className="h-full bg-gradient-to-r from-transparent via-white/20 dark:via-white/10 to-transparent animate-shimmer rounded"></div>
-                  </div>
-                </div>
-              </div>
-              {/* Icon skeleton */}
-              <div className="absolute left-0 top-3 w-5 h-5 bg-gray-400/60 dark:bg-gray-500/60 rounded animate-pulse"></div>
-              {/* Animated underline skeleton */}
-              <div className="absolute bottom-[6px] left-0 h-0.5 bg-gradient-to-r from-blue-400/60 to-cyan-400/60 w-3/5 animate-pulse"></div>
-            </div>
-
-            {/* Submit button skeleton */}
-            <div className="w-full py-3 mt-8 rounded-lg bg-gradient-to-r from-blue-600/60 to-cyan-600/60 flex items-center justify-center animate-pulse">
-              <div className="h-6 bg-white/20 rounded w-32">
-                <div className="h-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer rounded"></div>
-              </div>
+          {/* Social Media Icons skeleton - Bottom Center */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30">
+            <div className="flex items-center gap-6">
+              {/* Social icons skeletons */}
+              <div className="w-12 h-12 bg-gradient-to-r from-pink-500/60 via-purple-500/60 to-orange-500/60 rounded-full animate-pulse"></div>
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-600/60 to-blue-700/60 rounded-full animate-pulse"></div>
+              <div className="w-12 h-12 bg-gradient-to-r from-gray-800/60 to-black/60 rounded-full animate-pulse"></div>
             </div>
           </div>
         </div>
@@ -383,7 +504,7 @@ export default function HomePage() {
     // Navigate after animation completes
     setTimeout(() => {
       router.push("/work");
-    }, 1600); // Slightly longer to let sidebar animation complete
+    }, 2000); // Slightly longer to let sidebar animation complete
   };
 
   const handleContactClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -644,12 +765,12 @@ function HomePageContent({
 
               <button
                 onClick={handleContactClick}
-                className="group relative px-10 py-4 bg-gradient-to-r from-green-600 via-green-600 to-emerald-600 hover:from-green-700 hover:via-green-700 hover:to-emerald-700 text-white rounded-full text-xl font-bold flex items-center gap-3 transition-all duration-300 shadow-2xl hover:shadow-green-500/25 hover:scale-105"
+                className="group relative px-10 py-4 bg-gradient-to-r from-blue-800 via-blue-900 to-indigo-800 hover:from-blue-900 hover:via-blue-950 hover:to-indigo-900 text-white rounded-full text-xl font-bold flex items-center gap-3 transition-all duration-300 shadow-2xl hover:shadow-blue-800/25 hover:scale-105"
                 disabled={isTransitioning}
               >
                 <span className="relative z-10">{translations.buttons[language].contact}</span>
                 <ArrowRight size={24} className="ml-1 animate-bounce-right group-hover:translate-x-1 transition-transform" />
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-800 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
               </button>
               
               <p className="text-gray-700 dark:text-gray-400 text-sm italic mt-2">
@@ -659,7 +780,7 @@ function HomePageContent({
           </div>
 
           {/* Right Section - Name and Title in Center */}
-          <div className="flex-1 flex flex-col justify-center items-end px-8 lg:px-16 mr-[200px]">
+          <div className="flex-1 flex flex-col justify-center items-end px-8 lg:px-16 mr-[100px]">
             <div className="max-w-2xl text-center">
               {/* Name with glowing effect - centered */}
               <h1 className="relative text-5xl md:text-6xl lg:text-7xl font-black mb-4">
@@ -705,7 +826,7 @@ function HomePageContent({
         </div>
         
         {/* Keep the original image position and size */}
-        <div className="absolute bottom-0 left-[20%] w-[800px] h-[800px]">
+        <div className="absolute bottom-0 left-[50%] transform -translate-x-1/2 w-[900px] h-[900px]">
           <Image
             src="/assets/me.png"
             alt="Hicham Eljabbary"
